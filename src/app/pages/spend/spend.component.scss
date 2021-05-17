@@ -1,0 +1,5 @@
+@import '../../../assets/colors.scss';
+
+:host {
+  @include global-padding;
+}

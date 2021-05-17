@@ -1,0 +1,51 @@
+@import '../../../assets/colors.scss';
+
+mat-toolbar {
+  background-color: $red;
+  top: 0;
+  position: sticky;
+  z-index: 1;
+}
+
+
+
+.bottom-menu {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  box-shadow: 0 -1px 1px 1px rgb(0 0 0 / 15%);
+  background: #364f6b;
+  height: $bottom-menu-height;
+  width: 100%;
+  bottom: 0;
+  position: fixed;
+
+  button {
+    padding: 0;
+
+    .bottom-menu-option {
+      // display: flex;
+      // flex-direction: column;
+      // justify-content: center;
+      // text-align: center;
+      // height: 50px;
+      // width: 50px;
+      // vertical-align: middle;
+      // cursor: pointer;
+      // line-height: normal;
+
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      width: min-content;
+      line-height: normal;
+
+      .menu-option-text {
+        font-size: 10pt;
+        font-weight: 100;
+      }
+    }
+  }
+}

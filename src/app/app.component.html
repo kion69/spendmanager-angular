@@ -1,0 +1,8 @@
+<div class="content-router" [@routeAnimation]="prepareRoute(outlet)">
+    <app-side-menu></app-side-menu>
+    <router-outlet #outlet=outlet></router-outlet>
+</div>
+
+<div>
+    <app-navigation-menu></app-navigation-menu>
+</div>

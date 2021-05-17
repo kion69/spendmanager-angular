@@ -1,0 +1,22 @@
+<div class="bottom-menu">
+    <button mat-button routerLink="/home">
+        <div class="bottom-menu-option">
+            <span class="material-icons">description</span>
+            <span class="menu-option-text">Resumo</span>
+        </div>
+    </button>
+
+    <button mat-button routerLink="/spend">
+        <div class="bottom-menu-option">
+            <span class="material-icons">add_circle</span>
+            <span class="menu-option-text">Adicionar Gasto</span>
+        </div>
+    </button>
+    <button mat-button (click)="openSideMenu()">
+        <div class="bottom-menu-option">
+            <span class="material-icons">settings</span>
+            <span class="menu-option-text">Configurações</span>
+        </div>
+    </button>
+</div>
+

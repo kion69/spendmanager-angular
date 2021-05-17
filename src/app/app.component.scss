@@ -1,0 +1,9 @@
+@import '../assets/colors.scss';
+
+.content-router {
+  overflow-y: scroll;
+  max-height: calc(100% - #{$bottom-menu-height});
+  // background-color: rgba(255, 0,0,0.3);
+  width: 100%;
+  display: block;
+}

@@ -1,0 +1,41 @@
+@import '../../../assets/colors.scss';
+
+.side-menu {
+
+    .side-menu-backdrop {
+      background: rgba(0, 0, 0, 0.5);
+      width: 100vw;
+      height: 100vh;
+      top: 0;
+      z-index: 9;
+      position: fixed;
+      box-shadow: 0 0 10px 0px rgb(0 0 0 / 50%);
+    }
+  
+    .side-menu-item {
+      font-weight: 500;
+      background-color: white;
+      color: black;
+      position: fixed;
+      top: 0;
+      z-index: 9;
+      height: 100%;
+      min-width: 150px;
+  
+      &>p {
+        cursor: pointer;
+        padding: 15px 20px;
+        box-sizing: border-box;
+        -webkit-tap-highlight-color: transparent;
+  
+        &:active {
+          background-color: $cyan;
+          color: white;
+        }
+      }
+    }
+  
+    &.open {
+      display: block;
+    }
+  }

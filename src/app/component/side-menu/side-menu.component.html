@@ -1,0 +1,8 @@
+<div class="side-menu" *ngIf="sideMenuOpen">
+    <div class="side-menu-backdrop" (click)="sideMenuOpen = false"></div>
+    <div class="side-menu-item" [@slideAnimation]>
+        <p>Op1</p>
+        <p>Op2</p>
+        <p>Op3</p>
+    </div>
+</div>
