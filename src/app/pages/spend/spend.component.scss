@@ -3,3 +3,66 @@
 :host {
   @include global-padding;
 }
+
+.spend-header {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+  background: #fc5185;
+  color: #fff;
+  padding: 15px;
+  box-shadow: 0 1px 1px 1px rgb(0 0 0 / 30%);
+
+  .first-label {
+    font-size: 18pt;
+  }
+
+  .total-spent {
+    font-size: 22pt;
+    font-weight: 500;
+    grid-column: 2;
+    grid-row: 1 / 3;
+    align-self: center;
+    text-align: right;
+  }
+
+  .current-month {
+    font-weight: 300;
+  }
+}
+
+.spend-body {
+  display: grid;
+  grid-gap: 15px;
+  margin: 0 25px;
+  padding: 25px 0 35px;
+
+  mat-card-header {
+    mat-card-title {
+      color: $dark;
+    }
+  }
+}
+
+mat-card {
+  ::ng-deep .mat-card-header-text {
+    margin: 0
+  }
+}
+
+.spent-info {
+  display: grid;
+  grid-template-columns: auto auto;
+  color: $dark;
+  justify-content: space-between;
+
+  span:nth-child(2) {
+    font-weight: 500;
+  }
+}
+
+.action-button {
+    position: fixed;
+    top: calc(100% - 120px);
+    right: 25px;
+}

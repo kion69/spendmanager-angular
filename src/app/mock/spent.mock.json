@@ -1,0 +1,78 @@
+[{
+    "spentDate": "15/05/2021",
+
+    "spentItems": [{
+        "place": "Mercado",
+        "value": 80
+      },
+      {
+        "place": "Breja",
+        "value": 20
+      },
+      {
+        "place": "PC",
+        "value": 400
+      }
+    ]
+  },
+  {
+    "spentDate": "12/05/2021",
+    "spentItems": [{
+        "place": "Cadeira",
+        "value": 10123.13
+      },
+      {
+        "place": "SSD",
+        "value": 1200.99
+      },
+      {
+        "place": "Bar",
+        "value": 1200
+      },
+      {
+        "place": "Presente Aniversário",
+        "value": 1200
+      }
+    ]
+  },
+  {
+    "spentDate": "10/05/2021",
+    "spentItems": [{
+        "place": "Cadeira",
+        "value": 10123.13
+      },
+      {
+        "place": "SSD",
+        "value": 1200.99
+      },
+      {
+        "place": "Bar",
+        "value": 1200
+      },
+      {
+        "place": "Presente Aniversário",
+        "value": 1200
+      }
+    ]
+  },
+  {
+    "spentDate": "18/05/2021",
+    "spentItems": [{
+        "place": "Cadeira",
+        "value": 10123.13
+      },
+      {
+        "place": "SSD",
+        "value": 1200.99
+      },
+      {
+        "place": "Bar",
+        "value": 1200
+      },
+      {
+        "place": "Presente Aniversário",
+        "value": 1200
+      }
+    ]
+  }
+]

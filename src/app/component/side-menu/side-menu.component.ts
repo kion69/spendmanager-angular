@@ -28,5 +28,9 @@ export class SideMenuComponent implements OnInit {
     });
   }
 
+  close(){
+
+  }
+
 
 }

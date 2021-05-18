@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -15,8 +15,11 @@ import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './modules/shared/shared.module';
 import { SideMenuComponent } from './component/side-menu/side-menu.component';
-import * as EventEmitter from 'events';
+import { EventEmitterService } from './services/event-emitter.service';
+import localePtBr from '@angular/common/locales/pt';
+import { registerLocaleData } from '@angular/common';
 
+registerLocaleData(localePtBr);
 
 @NgModule({
   declarations: [
@@ -41,7 +44,10 @@ import * as EventEmitter from 'events';
     SpendModule,
     SharedModule
   ],
-  providers: [EventEmitter],
-  bootstrap: [AppComponent]
+  providers: [
+    { provide: LOCALE_ID, useValue: 'pt' },
+    EventEmitterService,
+  ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

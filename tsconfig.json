@@ -15,9 +15,12 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true
   },
-  "angularCompilerOptions": {
+    "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false
   }
 }

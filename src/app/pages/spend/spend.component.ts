@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import dayjs from 'dayjs';
+import { default as spentDataJSON } from '../../../app/mock/spent.mock.json';
 
 @Component({
   selector: 'app-spend',
@@ -7,8 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SpendComponent implements OnInit {
 
-  constructor() { }
+  currentMonth: string;
+  totalSpent: number;
+  spentData: any; //Needs to create an Interface
+  
+  constructor() {
+    this.spentData = spentDataJSON;
+  }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.totalSpent = 0;
+    this.currentMonth = dayjs().format('MMMM');
 
+    this.spentData.map((item: any) => {
+      item.totalSpent = item.spentItems.reduce((counter: number, currentValue: any) =>
+        counter + currentValue.value, 0);
+      this.totalSpent += item.totalSpent;
+    })
+  }
 }
