@@ -1,6 +1,6 @@
 <div class="side-menu-backdrop" *ngIf="sideMenuOpen" (click)="sideMenuOpen = false;"></div>
 
-<div class="side-menu" [@slideAnimation] *ngIf="sideMenuOpen">
+<div class="side-menu" [@horizontalSlideAnimation] *ngIf="sideMenuOpen">
     <div class="side-menu-item" >
         <p (click)="sideMenuOpen = false;">
             <span class="material-icons">close</span>

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ComponentRef, OnInit, ViewContainerRef } from '@angular/core';
+import { ComponentFactoryService } from 'src/app/services/component-factory.service';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +10,6 @@ export class HomeComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
 }

@@ -25,9 +25,14 @@ mat-toolbar {
   button {
     padding: 0;
 
+    ::ng-deep .mat-button-wrapper {
+      display: flex;
+      justify-content: center;
+    }
+
     .bottom-menu-option {
       // display: flex;
-      // flex-direction: column;
+      // flex-direction: column;  
       // justify-content: center;
       // text-align: center;
       // height: 50px;

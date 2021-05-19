@@ -3,13 +3,13 @@ import { Inject } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { Constants } from 'src/app/constants/event-emitter';
 import { EventEmitterService } from 'src/app/services/event-emitter.service';
-import { slideAnimation } from 'src/assets/animations/slide';
+import { horizontalSlideAnimation } from 'src/assets/animations/slide';
 
 @Component({
   selector: 'app-side-menu',
   templateUrl: './side-menu.component.html',
   styleUrls: ['./side-menu.component.scss'],
-  animations: [slideAnimation]
+  animations: [horizontalSlideAnimation]
 })
 export class SideMenuComponent implements OnInit {
 
@@ -27,10 +27,5 @@ export class SideMenuComponent implements OnInit {
       this.document.body.style.overflowY = this.sideMenuOpen ? 'hidden' : 'scroll';
     });
   }
-
-  close(){
-
-  }
-
 
 }

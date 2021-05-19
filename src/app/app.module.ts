@@ -18,6 +18,8 @@ import { SideMenuComponent } from './component/side-menu/side-menu.component';
 import { EventEmitterService } from './services/event-emitter.service';
 import localePtBr from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
+import { AddSpentComponent } from './component/modal/add-spent/add-spent.component';
+import { ComponentFactoryService } from './services/component-factory.service';
 
 registerLocaleData(localePtBr);
 
@@ -26,6 +28,7 @@ registerLocaleData(localePtBr);
     AppComponent,
     NavigationMenuComponent,
     SideMenuComponent,
+    AddSpentComponent,
   ],
   imports: [
     CommonModule,
@@ -47,7 +50,8 @@ registerLocaleData(localePtBr);
   providers: [
     { provide: LOCALE_ID, useValue: 'pt' },
     EventEmitterService,
+    ComponentFactoryService
   ],
-    bootstrap: [AppComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
