@@ -1,8 +1,9 @@
 @import '../assets/colors.scss';
 
 .content-router {
+  max-height: calc(100vh - (#{$bottom-menu-height} + #{$header-height}));
+  min-height: calc(100vh - (#{$bottom-menu-height} + #{$header-height}));
   overflow-y: auto;
-  max-height: calc(100% - #{$bottom-menu-height});
   width: 100%;
   display: block;
 }

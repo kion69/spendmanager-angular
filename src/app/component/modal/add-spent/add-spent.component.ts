@@ -18,9 +18,7 @@ export class AddSpentComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
-    this.showModal = true;
-  }
+  ngOnInit(): void { }
 
   fechar() {
     this.showModal = false;

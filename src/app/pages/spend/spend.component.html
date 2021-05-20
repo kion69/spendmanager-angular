@@ -1,41 +1,24 @@
-<div>
-    <div class="spend-header">
+<div class="spend-body">
 
-        <div class="first-label">
-            <span>Gasto Atual</span>
-        </div>
+    <mat-card *ngFor="let spent of spentData; let count = count">
 
-        <div class="total-spent">
-            <span>{{totalSpent | currency:'BRL' }}</span>
-        </div>
+        <mat-card-header>
+            <mat-card-title>{{spent.spentDate}}</mat-card-title>
+            <mat-card-subtitle>Total {{spent.totalSpent | currency:'BRL'}}</mat-card-subtitle>
+        </mat-card-header>
 
-        <div class="current-month">
-            <span>Mês {{currentMonth}}</span>
-        </div>
+        <mat-card-content>
+            <div class="spent-info" *ngFor="let item of spent.spentItems">
+                <span>{{item.place}}</span>
+                <span>{{item.value | currency:'BRL'}}</span>
+            </div>
+        </mat-card-content>
 
-    </div>
+    </mat-card>
+</div>
 
-    <div class="spend-body">
-        <mat-card *ngFor="let spent of spentData; let count = count">
-
-            <mat-card-header>
-                <mat-card-title>{{spent.spentDate}}</mat-card-title>
-                <mat-card-subtitle>Total {{spent.totalSpent | currency:'BRL'}}</mat-card-subtitle>
-            </mat-card-header>
-
-            <mat-card-content>
-                <div class="spent-info" *ngFor="let item of spent.spentItems">
-                    <span>{{item.place}}</span>
-                    <span>{{item.value | currency:'BRL'}}</span>
-                </div>
-            </mat-card-content>
-
-        </mat-card>
-    </div>
-
-    <div class="action-button">
-        <button mat-mini-fab (click)="addSpent()">
-            <mat-icon>add</mat-icon>
-        </button>
-    </div>
+<div class="action-button">
+    <button mat-mini-fab (click)="addSpent()">
+        <mat-icon>add</mat-icon>
+    </button>
 </div>

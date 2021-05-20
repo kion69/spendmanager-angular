@@ -3,3 +3,16 @@
 :host {
   @include global-padding;
 }
+
+.home-content {
+  max-width: 800px;
+
+  @media (min-width: 900px) {
+    margin: auto;
+  }
+
+  @media (max-width: 900px) {
+    margin: 0 25px;
+  }
+
+}

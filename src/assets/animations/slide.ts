@@ -3,7 +3,7 @@ import { trigger, transition, style, animate } from '@angular/animations';
 export const horizontalSlideAnimation =
     trigger('horizontalSlideAnimation', [
         transition(':enter', [
-            style({ transform: 'translateX(-100%)' }),
+            style({ transform: 'translateX(-100%)', width: '100%', position:'fixed' }),
             animate('100ms', style({ transform: 'translateX(0%)' }))
         ]),
         transition(':leave', [
@@ -11,13 +11,24 @@ export const horizontalSlideAnimation =
         ]),
     ]);
 
+// export const verticalSlideAnimation =
+//     trigger('verticalSlideAnimation', [
+//         transition(':enter', [
+//             style({ transform: 'translateY(100%)' }),
+//             animate('300ms', style({ transform: 'translateY(0%)' }))
+//         ]),
+//         transition(':leave', [
+//             animate('300ms', style({ transform: 'translateY(100%)' }))
+//         ]),
+//     ]);
+
 export const verticalSlideAnimation =
     trigger('verticalSlideAnimation', [
         transition(':enter', [
-            style({ transform: 'translateY(100%)' }),
-            animate('100ms', style({ transform: 'translateY(0%)' }))
+            style({ opacity: '0' }),
+            animate('300ms', style({opacity: 1  }))
         ]),
         transition(':leave', [
-            animate('100ms', style({ transform: 'translateY(100%)' }))
+            animate('300ms', style({ opacity: '0' }))
         ]),
     ]);

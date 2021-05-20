@@ -4,38 +4,19 @@
   @include global-padding;
 }
 
-.spend-header {
-  display: grid;
-  grid-template-columns: auto auto;
-  grid-template-rows: auto auto;
-  background: #fc5185;
-  color: #fff;
-  padding: 15px;
-  box-shadow: 0 1px 1px 1px rgb(0 0 0 / 30%);
-
-  .first-label {
-    font-size: 18pt;
-  }
-
-  .total-spent {
-    font-size: 22pt;
-    font-weight: 500;
-    grid-column: 2;
-    grid-row: 1 / 3;
-    align-self: center;
-    text-align: right;
-  }
-
-  .current-month {
-    font-weight: 300;
-  }
-}
-
 .spend-body {
   display: grid;
   grid-gap: 15px;
-  margin: 0 25px;
-  padding: 25px 0 35px;
+  padding: 25px 0 60px;
+  max-width: 800px;
+
+  @media (min-width: 900px) {
+    margin: auto;
+  }
+
+  @media (max-width: 900px) {
+    margin: 0 25px;
+  }
 
   mat-card-header {
     mat-card-title {

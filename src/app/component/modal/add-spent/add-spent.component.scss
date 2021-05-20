@@ -1,18 +1,28 @@
-:host {
+.spent-modal-backdrop {
   height: 100%;
   width: 100vw;
   position: fixed;
   top: 0;
-  z-index: 9;
-  background: rgba(0, 0, 0, .3);
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 8;
 }
 
 .spent-modal {
   background: white;
   color: black;
-  height: calc(100% - 70px);
-  margin: 25px 20px;
   border-radius: 4px;
   padding: 25px;
   box-sizing: border-box;
+  position: absolute;
+  z-index: 9;
+  top: 5%;
+  left: 25%;
+  width: 50%;
+  height: 70%;
+
+  @media (max-width: 425px) {
+    left: 5%;
+    width: 90%;
+    height: 70%;
+  }
 }

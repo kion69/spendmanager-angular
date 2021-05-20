@@ -1,6 +1,9 @@
-<div class="content-router" [@routeAnimation]="prepareRoute(outlet)">
+<div [@routeAnimation]="prepareRoute(outlet)">
+    <app-header></app-header>
     <app-side-menu></app-side-menu>
-    <router-outlet #outlet=outlet></router-outlet>
+    <div class="content-router">
+        <router-outlet #outlet=outlet></router-outlet>
+    </div>
 </div>
 
 <div>
