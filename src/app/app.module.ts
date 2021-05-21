@@ -21,6 +21,7 @@ import { registerLocaleData } from '@angular/common';
 import { AddSpentComponent } from './component/modal/add-spent/add-spent.component';
 import { ComponentFactoryService } from './services/component-factory.service';
 import { HeaderComponent } from './component/header/header.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 registerLocaleData(localePtBr);
 
@@ -47,7 +48,9 @@ registerLocaleData(localePtBr);
     }),
     HomeModule,
     SpendModule,
-    SharedModule
+    SharedModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'pt' },

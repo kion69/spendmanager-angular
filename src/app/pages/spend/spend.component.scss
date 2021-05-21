@@ -1,13 +1,9 @@
 @import '../../../assets/colors.scss';
 
-:host {
-  @include global-padding;
-}
-
 .spend-body {
   display: grid;
   grid-gap: 15px;
-  padding: 25px 0 60px;
+  padding: 25px 0 70px;
   max-width: 800px;
 
   @media (min-width: 900px) {
@@ -15,7 +11,7 @@
   }
 
   @media (max-width: 900px) {
-    margin: 0 25px;
+    @include global-margin;
   }
 
   mat-card-header {
@@ -45,7 +41,7 @@ mat-card {
 .action-button {
   position: absolute;
   top: calc(100% - 120px);
-  right: 25px;
+  right: 5px;
 
   button {
     background-color: $red;

@@ -1,9 +1,5 @@
 @import '../../../assets/colors.scss';
 
-:host {
-  @include global-padding;
-}
-
 .home-content {
   max-width: 800px;
 
@@ -12,7 +8,7 @@
   }
 
   @media (max-width: 900px) {
-    margin: 0 25px;
+    @include global-margin;
   }
 
 }

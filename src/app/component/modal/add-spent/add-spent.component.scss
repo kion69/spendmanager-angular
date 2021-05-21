@@ -2,6 +2,10 @@
 
 $mat-form-field-label-color: rgba($dark, 0.40);
 
+:host,
+h5 {
+  color: $dark;
+}
 
 .spent-modal-backdrop {
   height: 100%;
@@ -54,9 +58,9 @@ $mat-form-field-label-color: rgba($dark, 0.40);
     grid-column-end: 2 span;
   }
 
-
-  @media (max-width: 512px) {
-    grid-template-columns: none;
+  @media (max-width: 576px) {
+    display: flex;
+    flex-direction: column;
 
     .additional-information {
       grid-column-start: auto;
@@ -80,6 +84,12 @@ mat-icon {
   ::ng-deep .mat-form-field-label {
     // Text inside input
     color: $dark;
+  }
+
+  &.mat-form-field-invalid {
+    ::ng-deep .mat-form-field-label {
+      color: $red;
+    }
   }
 
   &.mat-focused {
@@ -109,13 +119,20 @@ mat-icon {
   ::ng-deep .mat-form-field-outline-thick {
     color: $mat-form-field-label-color;
   }
+
+  &.mat-form-field-invalid {
+    ::ng-deep .mat-form-field-outline-thick {
+      color: $red;
+    }
+
+  }
 }
 
 .modal-close-button {
   cursor: pointer;
 }
 
-.action-button {
+.modal-action-button {
   color: $dark;
   padding: 10px 0;
 
@@ -128,5 +145,46 @@ mat-icon {
         font-size: 15pt;
       }
     }
+  }
+}
+
+.accordion-action-button {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 0;
+
+  button {
+    background-color: $sky-blue-crayola;
+    color: $dark;
+  }
+}
+
+.spent-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 8px 0;
+  color: $dark;
+
+  .spent-list-item {
+    display: flex;
+    flex-direction: column;
+
+    :last-child {
+      color: rgba(#000, 0.4);
+    }
+  }
+
+  .spent-list-item-value {
+    font-weight: 500;
+  }
+}
+
+.add-spent-form {
+  display: flex;
+  justify-content: flex-end;
+
+  span {
+    cursor: pointer;
   }
 }

@@ -17,37 +17,63 @@
 <div class="modal-body" [@.disabled]="disableAnimation">
 
     <mat-accordion>
-        <mat-expansion-panel>
+        <mat-expansion-panel *ngFor="let item of spentForm">
             <mat-expansion-panel-header>
                 <mat-panel-title>
-                    15/05/2021
+                    {{item.spentDate}}
                 </mat-panel-title>
+                <mat-panel-description>
+                    Total {{item.spentTotal | currency: 'BRL'}}
+                </mat-panel-description>
             </mat-expansion-panel-header>
 
-            <div class="mat-dialog-content">
-                <mat-form-field class="classelegal" appearance="outline">
-                    <mat-label>Item*</mat-label>
-                    <input matInput>
-                </mat-form-field>
+            <div class="spent-list" *ngFor="let folder of [1,2,3,4]">
+                <div class="spent-list-item">
+                    <span>Cadeira</span>
+                    <span>Cadeira para mim meixmo</span>
+                </div>
 
-                <mat-form-field class="classelegal" appearance="outline">
-                    <mat-label>Valor*</mat-label>
-                    <input matInput number>
-                    <mat-icon class="material-icons-outlined" matSuffix>paid</mat-icon>
-                </mat-form-field>
-
-                <mat-form-field class="additional-information" appearance="outline">
-                    <mat-label>Descrição</mat-label>
-                    <input matInput number placeholder="Breve descrição">
-                </mat-form-field>
+                <div class="spent-list-item-value">R$800,99</div>
             </div>
-            <div>
-                <h6>* campos obrigatórios</h6>
+
+            <mat-dialog-content>
+                <form [formGroup]="formLegal">
+                    <div class="mat-dialog-content" *ngFor="let spent of item.spentItems;">
+                        <mat-form-field class="classelegal" appearance="outline">
+                            <mat-label>Item*</mat-label>
+                            <input formControlName="itemName" matInput>
+                        </mat-form-field>
+
+                        <mat-form-field class="classelegal" appearance="outline">
+                            <mat-label>Valor*</mat-label>
+                            <input formControlName="itemValue" matInput number>
+                            <mat-icon class="material-icons-outlined" matSuffix>paid</mat-icon>
+                        </mat-form-field>
+
+                        <mat-form-field class="additional-information" appearance="outline">
+                            <mat-label>Descrição</mat-label>
+                            <input formControlName="itemDescription" matInput number placeholder="Breve descrição">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="add-spent-form" *ngIf="item.spentItems.length === 0">
+                        <span matRipple class="material-icons material-icons-round" (click)="addNewSpentForm(item)">
+                            <mat-icon>add</mat-icon>
+                        </span>
+                    </div>
+
+                    <div class="accordion-action-button" *ngIf="item.spentItems.length > 0">
+                        <button mat-button>Adicionar</button>
+                    </div>
+                </form>
+            </mat-dialog-content>
+
+            <div *ngIf="item.spentItems.length > 0">
+                <h5>* campos obrigatórios</h5>
             </div>
         </mat-expansion-panel>
 
         <mat-expansion-panel>
-
             <mat-expansion-panel-header>
                 <mat-panel-title>
                     18/05/2021
@@ -73,7 +99,7 @@
             </div>
         </mat-expansion-panel>
 
-        <button mat-button class="action-button">
+        <button mat-button class="modal-action-button">
             <div class="button-container">
                 <span class="material-icons material-icons-round">
                     <mat-icon>add</mat-icon>
@@ -82,5 +108,4 @@
             </div>
         </button>
     </mat-accordion>
-
 </div>

@@ -34,7 +34,8 @@ export class SpendComponent implements OnInit {
   addSpent() {
     this.dialog.open(AddSpentComponent, {
       minHeight: '500px',
-      width: '500px'
+      width: '500px',
+      maxWidth: '90vw'
     })
   }
 }

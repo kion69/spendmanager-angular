@@ -1,4 +1,6 @@
 import { AfterViewInit, Component, ComponentRef, OnInit, ViewEncapsulation } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import dayjs from 'dayjs';
 import { verticalSlideAnimation } from 'src/assets/animations/slide';
 
 @Component({
@@ -15,17 +17,55 @@ export class AddSpentComponent implements OnInit, AfterViewInit {
   reference: ComponentRef<AddSpentComponent>;
   showModal = false;
   disableAnimation = true;
+  spentForm = [];
+  formLegal: FormGroup;
+  constructor(
+    private formBuilder: FormBuilder
+  ) {
+    this.formLegal = new FormGroup({});
+  }
 
-  constructor() { }
+  ngOnInit(): void {
+    if (this.spentForm.length === 0) {
 
-  ngOnInit(): void { }
+      this.spentForm.push({
+        spentDate: dayjs().format('DD/MM/YYYY'),
+        spentTotal: 0,
+        spentItems: []
+      });
+    }
+  }
 
-  fechar() {
-    this.showModal = false;
+  evento(event) {
+    console.log('legal');
+    const abc = new FormBuilder().group({
+      itemName: ['', Validators.required],
+      itemValue: ['', Validators.required],
+      itemDescription: [''],
+    });
+
+    this.spentForm[0].spentItems.push(abc);
+
+    console.log(this.spentForm);
+  }
+
+  addNewSpentForm(item) {
+    console.log('legal');
+    this.formLegal = new FormBuilder().group({
+      itemName: ['', Validators.required],
+      itemValue: ['', Validators.required],
+      itemDescription: [''],
+    });
+
+    item.spentItems.push(this.formLegal);
+
+    console.log(this.spentForm);
   }
 
   ngAfterViewInit(): void {
-    this.disableAnimation = false;
+    setTimeout(() => {
+      this.disableAnimation = false;
+    });
   }
 
   animationDone(event: any) {
@@ -33,5 +73,4 @@ export class AddSpentComponent implements OnInit, AfterViewInit {
       this.reference.destroy();
     }
   }
-
 }

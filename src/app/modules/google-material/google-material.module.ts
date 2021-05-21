@@ -9,7 +9,9 @@ import { MatRippleModule } from '@angular/material/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import {MatExpansionModule} from '@angular/material/expansion'; 
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [],
@@ -24,7 +26,9 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatDividerModule,
+    MatListModule
   ],
 })
 export class GoogleMaterialModule { }
