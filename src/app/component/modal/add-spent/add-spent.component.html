@@ -6,55 +6,81 @@
     <p (click)="fechar()">fechar</p>
 </div> -->
 
-<div>
-    <mat-dialog-content>
-        sou modal
-        <p (click)="fechar()">fechar</p>
-        sou modal
-        <p (click)="fechar()">fechar</p>
-        sou modal
-        <p (click)="fechar()">fechar</p>
-        sou modal
-        <p (click)="fechar()">fechar</p>
-        sou modal
-        <p (click)="fechar()">fechar</p>
-        sou modal
-        <p (click)="fechar()">fechar</p>
-        sou modal
-        <p (click)="fechar()">fechar</p>
-        sou modal
-        <p (click)="fechar()">fechar</p>
-        sou modal
-        <p (click)="fechar()">fechar</p>
-        sou modal
-        <p (click)="fechar()">fechar</p>
-        sou modal
-        <p (click)="fechar()">fechar</p>
-        sou modal
-        <p (click)="fechar()">fechar</p>
-        sou modal
-        <p (click)="fechar()">fechar</p>
-        sou modal
-        <p (click)="fechar()">fechar</p>
-        sou modal
-        <p (click)="fechar()">fechar</p>
-        sou modal
-        <p (click)="fechar()">fechar</p>
-        sou modal
-        <p (click)="fechar()">fechar</p>
-        sou modal
-        <p (click)="fechar()">fechar</p>
-        sou modal
-        <p (click)="fechar()">fechar</p>
-        sou modal
-        <p (click)="fechar()">fechar</p>
-        sou modal
-        <p (click)="fechar()">fechar</p>
-        sou modal
-        <p (click)="fechar()">fechar</p>
-        sou modal
-        <p (click)="fechar()">fechar</p>
-        sou modal
-        <p (click)="fechar()">fechar</p>
-    </mat-dialog-content>
+<div class="modal-header" mat-dialog-title>
+    <span>Adicionar novo gasto</span>
+    <span class="modal-close-button" mat-dialog-close>
+        <mat-icon class="material-icons-outlined"> close </mat-icon>
+    </span>
+</div>
+
+
+<div class="modal-body" [@.disabled]="disableAnimation">
+
+    <mat-accordion>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    15/05/2021
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <div class="mat-dialog-content">
+                <mat-form-field class="classelegal" appearance="outline">
+                    <mat-label>Item*</mat-label>
+                    <input matInput>
+                </mat-form-field>
+
+                <mat-form-field class="classelegal" appearance="outline">
+                    <mat-label>Valor*</mat-label>
+                    <input matInput number>
+                    <mat-icon class="material-icons-outlined" matSuffix>paid</mat-icon>
+                </mat-form-field>
+
+                <mat-form-field class="additional-information" appearance="outline">
+                    <mat-label>Descrição</mat-label>
+                    <input matInput number placeholder="Breve descrição">
+                </mat-form-field>
+            </div>
+            <div>
+                <h6>* campos obrigatórios</h6>
+            </div>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    18/05/2021
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <div class="mat-dialog-content">
+                <mat-form-field class="classelegal" appearance="outline">
+                    <mat-label>Item</mat-label>
+                    <input matInput>
+                </mat-form-field>
+
+                <mat-form-field class="classelegal" appearance="outline">
+                    <mat-label>Valor</mat-label>
+                    <input matInput number>
+                    <mat-icon class="material-icons-outlined" matSuffix>paid</mat-icon>
+                </mat-form-field>
+
+                <mat-form-field class="additional-information" appearance="outline">
+                    <mat-label>Comentário</mat-label>
+                    <input matInput>
+                </mat-form-field>
+            </div>
+        </mat-expansion-panel>
+
+        <button mat-button class="action-button">
+            <div class="button-container">
+                <span class="material-icons material-icons-round">
+                    <mat-icon>add</mat-icon>
+                </span>
+                <span> Nova Data</span>
+            </div>
+        </button>
+    </mat-accordion>
+
 </div>

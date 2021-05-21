@@ -1,5 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { Inject } from '@angular/core';
+import { ViewEncapsulation } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { Constants } from 'src/app/constants/event-emitter';
 import { EventEmitterService } from 'src/app/services/event-emitter.service';
@@ -9,6 +10,7 @@ import { horizontalSlideAnimation } from 'src/assets/animations/slide';
   selector: 'app-side-menu',
   templateUrl: './side-menu.component.html',
   styleUrls: ['./side-menu.component.scss'],
+  encapsulation: ViewEncapsulation.Emulated,
   animations: [horizontalSlideAnimation]
 })
 export class SideMenuComponent implements OnInit {

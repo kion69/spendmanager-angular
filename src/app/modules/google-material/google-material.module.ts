@@ -7,6 +7,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatCardModule } from '@angular/material/card';
 import { MatRippleModule } from '@angular/material/core';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import {MatExpansionModule} from '@angular/material/expansion'; 
 
 @NgModule({
   declarations: [],
@@ -18,7 +21,10 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatSidenavModule,
     MatCardModule,
     MatRippleModule,
-    MatDialogModule 
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatExpansionModule
   ],
 })
 export class GoogleMaterialModule { }

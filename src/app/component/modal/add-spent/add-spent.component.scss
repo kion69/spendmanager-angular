@@ -1,3 +1,8 @@
+@import '../../../../assets/colors.scss';
+
+$mat-form-field-label-color: rgba($dark, 0.40);
+
+
 .spent-modal-backdrop {
   height: 100%;
   width: 100vw;
@@ -24,5 +29,104 @@
     left: 5%;
     width: 90%;
     height: 70%;
+  }
+}
+
+.mat-expansion-panel {
+  &.corbosta {
+    background-color: #f0f0f0;
+  }
+}
+
+.modal-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.mat-dialog-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-gap: 10px;
+
+  .additional-information {
+    grid-column-start: 1;
+    grid-column-end: 2 span;
+  }
+
+
+  @media (max-width: 512px) {
+    grid-template-columns: none;
+
+    .additional-information {
+      grid-column-start: auto;
+      grid-column-end: auto;
+    }
+  }
+}
+
+
+mat-icon {
+  color: $dark;
+}
+
+::ng-deep .mat-form-field {
+
+  .mat-form-field-wrapper {
+    //space around the input
+    padding-bottom: 0;
+  }
+
+  ::ng-deep .mat-form-field-label {
+    // Text inside input
+    color: $dark;
+  }
+
+  &.mat-focused {
+
+    // when input is focused the label above 
+    .mat-form-field-label {
+      color: $dark;
+    }
+  }
+}
+
+.mat-form-field-appearance-outline {
+
+  // outline of input
+  &.mat-focused {
+
+    //when input is focused 
+    ::ng-deep .mat-form-field-outline-thick {
+      color: $dark;
+    }
+  }
+}
+
+.mat-form-field-appearance-outline {
+
+  //outline when input is hovered
+  ::ng-deep .mat-form-field-outline-thick {
+    color: $mat-form-field-label-color;
+  }
+}
+
+.modal-close-button {
+  cursor: pointer;
+}
+
+.action-button {
+  color: $dark;
+  padding: 10px 0;
+
+  .button-container {
+    display: flex;
+    align-items: center;
+
+    span {
+      &.material-icons {
+        font-size: 15pt;
+      }
+    }
   }
 }

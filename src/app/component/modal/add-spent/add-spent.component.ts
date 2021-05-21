@@ -1,6 +1,5 @@
-import { Component, ComponentFactoryResolver, ComponentRef, NgZone, OnInit, ViewContainerRef } from '@angular/core';
-import { ComponentFactoryService } from 'src/app/services/component-factory.service';
-import { horizontalSlideAnimation, verticalSlideAnimation } from 'src/assets/animations/slide';
+import { AfterViewInit, Component, ComponentRef, OnInit, ViewEncapsulation } from '@angular/core';
+import { verticalSlideAnimation } from 'src/assets/animations/slide';
 
 @Component({
   selector: 'app-add-spent',
@@ -11,10 +10,11 @@ import { horizontalSlideAnimation, verticalSlideAnimation } from 'src/assets/ani
     '(@verticalSlideAnimation.done)': 'animationDone($event)'
   }
 })
-export class AddSpentComponent implements OnInit {
+export class AddSpentComponent implements OnInit, AfterViewInit {
 
   reference: ComponentRef<AddSpentComponent>;
   showModal = false;
+  disableAnimation = true;
 
   constructor() { }
 
@@ -22,6 +22,10 @@ export class AddSpentComponent implements OnInit {
 
   fechar() {
     this.showModal = false;
+  }
+
+  ngAfterViewInit(): void {
+    this.disableAnimation = false;
   }
 
   animationDone(event: any) {

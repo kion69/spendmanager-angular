@@ -3,7 +3,9 @@
 <div class="side-menu" [@horizontalSlideAnimation] *ngIf="sideMenuOpen">
     <div class="side-menu-item" >
         <p (click)="sideMenuOpen = false;">
-            <span class="material-icons">close</span>
+            <span class="material-icons">
+                <mat-icon class="material-icons-round">close</mat-icon>
+            </span>
         </p>
         <p>Op1</p>
         <p>Op2</p>

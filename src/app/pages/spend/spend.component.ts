@@ -3,11 +3,13 @@ import dayjs from 'dayjs';
 import { default as spentDataJSON } from '../../../app/mock/spent.mock.json';
 import { AddSpentComponent } from 'src/app/component/modal/add-spent/add-spent.component';
 import { MatDialog } from '@angular/material/dialog';
+import { ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-spend',
   templateUrl: './spend.component.html',
-  styleUrls: ['./spend.component.scss']
+  styleUrls: ['./spend.component.scss'],
+  encapsulation: ViewEncapsulation.Emulated,
 })
 export class SpendComponent implements OnInit {
 
@@ -20,12 +22,13 @@ export class SpendComponent implements OnInit {
     // private factoryService: ComponentFactoryService,
     private dialog: MatDialog
   ) {
-    this.spentData = spentDataJSON;
+
+    this.currentMonth = dayjs().format('MMMM');
+    const currentYear = dayjs().year();
+    this.spentData = spentDataJSON[currentYear][this.currentMonth];
   }
 
   ngOnInit(): void {
-    this.totalSpent = 0;
-    this.currentMonth = dayjs().format('MMMM');
   }
 
   addSpent() {
