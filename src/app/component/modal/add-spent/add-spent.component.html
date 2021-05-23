@@ -17,7 +17,7 @@
 <div class="modal-body" [@.disabled]="disableAnimation">
 
     <mat-accordion>
-        <mat-expansion-panel *ngFor="let item of spentForm">
+        <mat-expansion-panel *ngFor="let item of spentInformation">
             <mat-expansion-panel-header>
                 <mat-panel-title>
                     {{item.spentDate}}
@@ -27,18 +27,18 @@
                 </mat-panel-description>
             </mat-expansion-panel-header>
 
-            <div class="spent-list" *ngFor="let folder of [1,2,3,4]">
+            <div class="spent-list" *ngFor="let folder of item.spentList">
                 <div class="spent-list-item">
-                    <span>Cadeira</span>
-                    <span>Cadeira para mim meixmo</span>
+                    <span>{{folder.itemName}}</span>
+                    <span>{{folder.itemDescription}}</span>
                 </div>
 
-                <div class="spent-list-item-value">R$800,99</div>
+                <div class="spent-list-item-value">{{folder.itemValue | currency : 'BRL'}}</div>
             </div>
 
             <mat-dialog-content>
-                <form [formGroup]="formLegal">
-                    <div class="mat-dialog-content" *ngFor="let spent of item.spentItems;">
+                <form [formGroup]="spentForm">
+                    <div class="mat-dialog-content">
                         <mat-form-field class="classelegal" appearance="outline">
                             <mat-label>Item*</mat-label>
                             <input formControlName="itemName" matInput>
@@ -56,51 +56,34 @@
                         </mat-form-field>
                     </div>
 
-                    <div class="add-spent-form" *ngIf="item.spentItems.length === 0">
-                        <span matRipple class="material-icons material-icons-round" (click)="addNewSpentForm(item)">
-                            <mat-icon>add</mat-icon>
-                        </span>
+                    <div class="accordion-action-button">
+                        <button class="modal-action-button" mat-button (click)="validateInput(item)">
+                            <div class="button-container">
+                                <span class="material-icons material-icons-round">
+                                    <mat-icon>add</mat-icon>
+                                </span>
+                                <span>Adicionar</span>
+                            </div>
+                        </button>
                     </div>
 
-                    <div class="accordion-action-button" *ngIf="item.spentItems.length > 0">
-                        <button mat-button>Adicionar</button>
-                    </div>
                 </form>
             </mat-dialog-content>
 
-            <div *ngIf="item.spentItems.length > 0">
+            <div>
                 <h5>* campos obrigatórios</h5>
             </div>
         </mat-expansion-panel>
 
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    18/05/2021
-                </mat-panel-title>
-            </mat-expansion-panel-header>
-
-            <div class="mat-dialog-content">
-                <mat-form-field class="classelegal" appearance="outline">
-                    <mat-label>Item</mat-label>
-                    <input matInput>
-                </mat-form-field>
-
-                <mat-form-field class="classelegal" appearance="outline">
-                    <mat-label>Valor</mat-label>
-                    <input matInput number>
-                    <mat-icon class="material-icons-outlined" matSuffix>paid</mat-icon>
-                </mat-form-field>
-
-                <mat-form-field class="additional-information" appearance="outline">
-                    <mat-label>Comentário</mat-label>
-                    <input matInput>
-                </mat-form-field>
-            </div>
-        </mat-expansion-panel>
+        <div *ngIf="addNewDate">
+            <mat-form-field class="additional-information" appearance="outline">
+                <mat-label>Nova Data</mat-label>
+                <input matInput [(ngModel)]="newDateInput" (focusout)="insertNewDate(newDateInput)">
+            </mat-form-field>
+        </div>
 
         <button mat-button class="modal-action-button">
-            <div class="button-container">
+            <div class="button-container" (click)="addNewDate = !addNewDate">
                 <span class="material-icons material-icons-round">
                     <mat-icon>add</mat-icon>
                 </span>
