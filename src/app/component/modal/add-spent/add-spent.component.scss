@@ -36,12 +36,6 @@ h5 {
   }
 }
 
-.mat-expansion-panel {
-  &.corbosta {
-    background-color: #f0f0f0;
-  }
-}
-
 .modal-header {
   display: flex;
   flex-direction: row;
@@ -69,9 +63,14 @@ h5 {
   }
 }
 
-
 mat-icon {
   color: $dark;
+  vertical-align: middle;
+}
+
+.mat-datepicker-toggle {
+  color: $dark;
+
 }
 
 ::ng-deep .mat-form-field {
@@ -134,8 +133,12 @@ mat-icon {
 
 .modal-action-button {
   color: $dark;
-  padding: 0 10px;
-  margin: 10px 0;
+  padding: 0 10px 0 0;
+  margin: 0;
+
+  &.new-date {
+    margin-top: 10px;
+  }
 
   .button-container {
     display: flex;
@@ -158,6 +161,11 @@ mat-icon {
     background-color: $sky-blue-crayola;
     color: $dark;
   }
+}
+
+::ng-deep .mat-expansion-panel-body {
+  max-height: 300px;
+  overflow-y: scroll;
 }
 
 .spent-list {
@@ -187,5 +195,23 @@ mat-icon {
 
   span {
     cursor: pointer;
+  }
+}
+
+.mat-expansion-panel-header {
+  ::ng-deep .mat-content {
+    @media (max-width: 320px) {
+      flex-direction: column;
+    }
+  }
+}
+
+.new-date-container {
+  display: flex;
+  flex-direction: row;
+  padding-top: 10px;
+
+  @media (max-width: 320px) {
+    flex-direction: column;
   }
 }

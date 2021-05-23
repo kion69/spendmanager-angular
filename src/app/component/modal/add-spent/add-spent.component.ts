@@ -1,7 +1,7 @@
-import { AfterViewInit, Component, ComponentRef, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ComponentRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import dayjs from 'dayjs';
-import customParseFormat from 'dayjs/plugin/customParseFormat'
+import { DateParseService } from 'src/app/services/date-parse.service';
 import { verticalSlideAnimation } from 'src/assets/animations/slide';
 
 
@@ -16,41 +16,620 @@ import { verticalSlideAnimation } from 'src/assets/animations/slide';
 })
 export class AddSpentComponent implements OnInit, AfterViewInit {
 
-  reference: ComponentRef<AddSpentComponent>;
-  showModal: boolean;
-  disableAnimation: boolean;
-  spentInformation = Array<any>();
   spentForm: FormGroup;
+  dateForm: FormGroup;
+  spentInformation = Array<any>();
+  disableAnimation: boolean;
   addNewDate: boolean;
   newDateInput: string;
 
-  constructor() {
+  @ViewChild('picker') picker;
+
+  constructor(private dateParser: DateParseService) {
     this.newDateInput = '';
     this.addNewDate = false;
-    this.showModal = false;
     this.disableAnimation = true;
 
-    this.spentInformation = [{
-      spentDate: dayjs().format('DD/MM/YYYY'),
-      spentTotal: 0,
-      spentList: [
-        {
-          itemName: 'Cadeira',
-          itemValue: 123,
-          itemDescription: ''
-        },
-        {
-          itemName: 'Cafeteira',
-          itemValue: 12,
-          itemDescription: 'Magica'
-        },
-        {
-          itemName: 'Frigideira',
-          itemValue: 123,
-          itemDescription: 'Isso ae'
-        }
-      ]
-    }];
+    this.dateForm = new FormBuilder().group({
+      newDateInput: ['']
+    });
+
+    this.spentInformation = [
+      {
+        spentDate: dayjs().format('DD/MM/YYYY'),
+        spentTotal: 0,
+        spentList: [
+          {
+            itemName: 'Cadeira',
+            itemValue: 123,
+            itemDescription: ''
+          },
+          {
+            itemName: 'Cafeteira',
+            itemValue: 12,
+            itemDescription: 'Magica'
+          },
+          {
+            itemName: 'Frigideira',
+            itemValue: 123,
+            itemDescription: 'Isso ae'
+          },
+          {
+            itemName: 'Cadeira',
+            itemValue: 123,
+            itemDescription: ''
+          },
+          {
+            itemName: 'Cafeteira',
+            itemValue: 12,
+            itemDescription: 'Magica'
+          },
+          {
+            itemName: 'Frigideira',
+            itemValue: 123,
+            itemDescription: 'Isso ae'
+          },
+          {
+            itemName: 'Cadeira',
+            itemValue: 123,
+            itemDescription: ''
+          },
+          {
+            itemName: 'Cafeteira',
+            itemValue: 12,
+            itemDescription: 'Magica'
+          },
+          {
+            itemName: 'Frigideira',
+            itemValue: 123,
+            itemDescription: 'Isso ae'
+          },
+          {
+            itemName: 'Cadeira',
+            itemValue: 123,
+            itemDescription: ''
+          },
+          {
+            itemName: 'Cafeteira',
+            itemValue: 12,
+            itemDescription: 'Magica'
+          },
+          {
+            itemName: 'Frigideira',
+            itemValue: 123,
+            itemDescription: 'Isso ae'
+          },
+        ]
+      },
+      {
+        spentDate: dayjs().format('DD/MM/YYYY'),
+        spentTotal: 0,
+        spentList: [
+          {
+            itemName: 'Cadeira',
+            itemValue: 123,
+            itemDescription: ''
+          },
+          {
+            itemName: 'Cafeteira',
+            itemValue: 12,
+            itemDescription: 'Magica'
+          },
+          {
+            itemName: 'Frigideira',
+            itemValue: 123,
+            itemDescription: 'Isso ae'
+          },
+          {
+            itemName: 'Cadeira',
+            itemValue: 123,
+            itemDescription: ''
+          },
+          {
+            itemName: 'Cafeteira',
+            itemValue: 12,
+            itemDescription: 'Magica'
+          },
+          {
+            itemName: 'Frigideira',
+            itemValue: 123,
+            itemDescription: 'Isso ae'
+          },
+          {
+            itemName: 'Cadeira',
+            itemValue: 123,
+            itemDescription: ''
+          },
+          {
+            itemName: 'Cafeteira',
+            itemValue: 12,
+            itemDescription: 'Magica'
+          },
+          {
+            itemName: 'Frigideira',
+            itemValue: 123,
+            itemDescription: 'Isso ae'
+          },
+          {
+            itemName: 'Cadeira',
+            itemValue: 123,
+            itemDescription: ''
+          },
+          {
+            itemName: 'Cafeteira',
+            itemValue: 12,
+            itemDescription: 'Magica'
+          },
+          {
+            itemName: 'Frigideira',
+            itemValue: 123,
+            itemDescription: 'Isso ae'
+          },
+        ]
+      },
+      {
+        spentDate: dayjs().format('DD/MM/YYYY'),
+        spentTotal: 0,
+        spentList: [
+          {
+            itemName: 'Cadeira',
+            itemValue: 123,
+            itemDescription: ''
+          },
+          {
+            itemName: 'Cafeteira',
+            itemValue: 12,
+            itemDescription: 'Magica'
+          },
+          {
+            itemName: 'Frigideira',
+            itemValue: 123,
+            itemDescription: 'Isso ae'
+          },
+          {
+            itemName: 'Cadeira',
+            itemValue: 123,
+            itemDescription: ''
+          },
+          {
+            itemName: 'Cafeteira',
+            itemValue: 12,
+            itemDescription: 'Magica'
+          },
+          {
+            itemName: 'Frigideira',
+            itemValue: 123,
+            itemDescription: 'Isso ae'
+          },
+          {
+            itemName: 'Cadeira',
+            itemValue: 123,
+            itemDescription: ''
+          },
+          {
+            itemName: 'Cafeteira',
+            itemValue: 12,
+            itemDescription: 'Magica'
+          },
+          {
+            itemName: 'Frigideira',
+            itemValue: 123,
+            itemDescription: 'Isso ae'
+          },
+          {
+            itemName: 'Cadeira',
+            itemValue: 123,
+            itemDescription: ''
+          },
+          {
+            itemName: 'Cafeteira',
+            itemValue: 12,
+            itemDescription: 'Magica'
+          },
+          {
+            itemName: 'Frigideira',
+            itemValue: 123,
+            itemDescription: 'Isso ae'
+          },
+        ]
+      },
+      {
+        spentDate: dayjs().format('DD/MM/YYYY'),
+        spentTotal: 0,
+        spentList: [
+          {
+            itemName: 'Cadeira',
+            itemValue: 123,
+            itemDescription: ''
+          },
+          {
+            itemName: 'Cafeteira',
+            itemValue: 12,
+            itemDescription: 'Magica'
+          },
+          {
+            itemName: 'Frigideira',
+            itemValue: 123,
+            itemDescription: 'Isso ae'
+          },
+          {
+            itemName: 'Cadeira',
+            itemValue: 123,
+            itemDescription: ''
+          },
+          {
+            itemName: 'Cafeteira',
+            itemValue: 12,
+            itemDescription: 'Magica'
+          },
+          {
+            itemName: 'Frigideira',
+            itemValue: 123,
+            itemDescription: 'Isso ae'
+          },
+          {
+            itemName: 'Cadeira',
+            itemValue: 123,
+            itemDescription: ''
+          },
+          {
+            itemName: 'Cafeteira',
+            itemValue: 12,
+            itemDescription: 'Magica'
+          },
+          {
+            itemName: 'Frigideira',
+            itemValue: 123,
+            itemDescription: 'Isso ae'
+          },
+          {
+            itemName: 'Cadeira',
+            itemValue: 123,
+            itemDescription: ''
+          },
+          {
+            itemName: 'Cafeteira',
+            itemValue: 12,
+            itemDescription: 'Magica'
+          },
+          {
+            itemName: 'Frigideira',
+            itemValue: 123,
+            itemDescription: 'Isso ae'
+          },
+        ]
+      },
+      {
+        spentDate: dayjs().format('DD/MM/YYYY'),
+        spentTotal: 0,
+        spentList: [
+          {
+            itemName: 'Cadeira',
+            itemValue: 123,
+            itemDescription: ''
+          },
+          {
+            itemName: 'Cafeteira',
+            itemValue: 12,
+            itemDescription: 'Magica'
+          },
+          {
+            itemName: 'Frigideira',
+            itemValue: 123,
+            itemDescription: 'Isso ae'
+          },
+          {
+            itemName: 'Cadeira',
+            itemValue: 123,
+            itemDescription: ''
+          },
+          {
+            itemName: 'Cafeteira',
+            itemValue: 12,
+            itemDescription: 'Magica'
+          },
+          {
+            itemName: 'Frigideira',
+            itemValue: 123,
+            itemDescription: 'Isso ae'
+          },
+          {
+            itemName: 'Cadeira',
+            itemValue: 123,
+            itemDescription: ''
+          },
+          {
+            itemName: 'Cafeteira',
+            itemValue: 12,
+            itemDescription: 'Magica'
+          },
+          {
+            itemName: 'Frigideira',
+            itemValue: 123,
+            itemDescription: 'Isso ae'
+          },
+          {
+            itemName: 'Cadeira',
+            itemValue: 123,
+            itemDescription: ''
+          },
+          {
+            itemName: 'Cafeteira',
+            itemValue: 12,
+            itemDescription: 'Magica'
+          },
+          {
+            itemName: 'Frigideira',
+            itemValue: 123,
+            itemDescription: 'Isso ae'
+          },
+        ]
+      },
+      {
+        spentDate: dayjs().format('DD/MM/YYYY'),
+        spentTotal: 0,
+        spentList: [
+          {
+            itemName: 'Cadeira',
+            itemValue: 123,
+            itemDescription: ''
+          },
+          {
+            itemName: 'Cafeteira',
+            itemValue: 12,
+            itemDescription: 'Magica'
+          },
+          {
+            itemName: 'Frigideira',
+            itemValue: 123,
+            itemDescription: 'Isso ae'
+          },
+          {
+            itemName: 'Cadeira',
+            itemValue: 123,
+            itemDescription: ''
+          },
+          {
+            itemName: 'Cafeteira',
+            itemValue: 12,
+            itemDescription: 'Magica'
+          },
+          {
+            itemName: 'Frigideira',
+            itemValue: 123,
+            itemDescription: 'Isso ae'
+          },
+          {
+            itemName: 'Cadeira',
+            itemValue: 123,
+            itemDescription: ''
+          },
+          {
+            itemName: 'Cafeteira',
+            itemValue: 12,
+            itemDescription: 'Magica'
+          },
+          {
+            itemName: 'Frigideira',
+            itemValue: 123,
+            itemDescription: 'Isso ae'
+          },
+          {
+            itemName: 'Cadeira',
+            itemValue: 123,
+            itemDescription: ''
+          },
+          {
+            itemName: 'Cafeteira',
+            itemValue: 12,
+            itemDescription: 'Magica'
+          },
+          {
+            itemName: 'Frigideira',
+            itemValue: 123,
+            itemDescription: 'Isso ae'
+          },
+        ]
+      },
+      {
+        spentDate: dayjs().format('DD/MM/YYYY'),
+        spentTotal: 0,
+        spentList: [
+          {
+            itemName: 'Cadeira',
+            itemValue: 123,
+            itemDescription: ''
+          },
+          {
+            itemName: 'Cafeteira',
+            itemValue: 12,
+            itemDescription: 'Magica'
+          },
+          {
+            itemName: 'Frigideira',
+            itemValue: 123,
+            itemDescription: 'Isso ae'
+          },
+          {
+            itemName: 'Cadeira',
+            itemValue: 123,
+            itemDescription: ''
+          },
+          {
+            itemName: 'Cafeteira',
+            itemValue: 12,
+            itemDescription: 'Magica'
+          },
+          {
+            itemName: 'Frigideira',
+            itemValue: 123,
+            itemDescription: 'Isso ae'
+          },
+          {
+            itemName: 'Cadeira',
+            itemValue: 123,
+            itemDescription: ''
+          },
+          {
+            itemName: 'Cafeteira',
+            itemValue: 12,
+            itemDescription: 'Magica'
+          },
+          {
+            itemName: 'Frigideira',
+            itemValue: 123,
+            itemDescription: 'Isso ae'
+          },
+          {
+            itemName: 'Cadeira',
+            itemValue: 123,
+            itemDescription: ''
+          },
+          {
+            itemName: 'Cafeteira',
+            itemValue: 12,
+            itemDescription: 'Magica'
+          },
+          {
+            itemName: 'Frigideira',
+            itemValue: 123,
+            itemDescription: 'Isso ae'
+          },
+        ]
+      },
+      {
+        spentDate: dayjs().format('DD/MM/YYYY'),
+        spentTotal: 0,
+        spentList: [
+          {
+            itemName: 'Cadeira',
+            itemValue: 123,
+            itemDescription: ''
+          },
+          {
+            itemName: 'Cafeteira',
+            itemValue: 12,
+            itemDescription: 'Magica'
+          },
+          {
+            itemName: 'Frigideira',
+            itemValue: 123,
+            itemDescription: 'Isso ae'
+          },
+          {
+            itemName: 'Cadeira',
+            itemValue: 123,
+            itemDescription: ''
+          },
+          {
+            itemName: 'Cafeteira',
+            itemValue: 12,
+            itemDescription: 'Magica'
+          },
+          {
+            itemName: 'Frigideira',
+            itemValue: 123,
+            itemDescription: 'Isso ae'
+          },
+          {
+            itemName: 'Cadeira',
+            itemValue: 123,
+            itemDescription: ''
+          },
+          {
+            itemName: 'Cafeteira',
+            itemValue: 12,
+            itemDescription: 'Magica'
+          },
+          {
+            itemName: 'Frigideira',
+            itemValue: 123,
+            itemDescription: 'Isso ae'
+          },
+          {
+            itemName: 'Cadeira',
+            itemValue: 123,
+            itemDescription: ''
+          },
+          {
+            itemName: 'Cafeteira',
+            itemValue: 12,
+            itemDescription: 'Magica'
+          },
+          {
+            itemName: 'Frigideira',
+            itemValue: 123,
+            itemDescription: 'Isso ae'
+          },
+        ]
+      },
+      {
+        spentDate: dayjs().format('DD/MM/YYYY'),
+        spentTotal: 0,
+        spentList: [
+          {
+            itemName: 'Cadeira',
+            itemValue: 123,
+            itemDescription: ''
+          },
+          {
+            itemName: 'Cafeteira',
+            itemValue: 12,
+            itemDescription: 'Magica'
+          },
+          {
+            itemName: 'Frigideira',
+            itemValue: 123,
+            itemDescription: 'Isso ae'
+          },
+          {
+            itemName: 'Cadeira',
+            itemValue: 123,
+            itemDescription: ''
+          },
+          {
+            itemName: 'Cafeteira',
+            itemValue: 12,
+            itemDescription: 'Magica'
+          },
+          {
+            itemName: 'Frigideira',
+            itemValue: 123,
+            itemDescription: 'Isso ae'
+          },
+          {
+            itemName: 'Cadeira',
+            itemValue: 123,
+            itemDescription: ''
+          },
+          {
+            itemName: 'Cafeteira',
+            itemValue: 12,
+            itemDescription: 'Magica'
+          },
+          {
+            itemName: 'Frigideira',
+            itemValue: 123,
+            itemDescription: 'Isso ae'
+          },
+          {
+            itemName: 'Cadeira',
+            itemValue: 123,
+            itemDescription: ''
+          },
+          {
+            itemName: 'Cafeteira',
+            itemValue: 12,
+            itemDescription: 'Magica'
+          },
+          {
+            itemName: 'Frigideira',
+            itemValue: 123,
+            itemDescription: 'Isso ae'
+          },
+        ]
+      },
+    ];
 
     this.spentForm = new FormBuilder().group({
       itemName: ['', Validators.required],
@@ -92,18 +671,17 @@ export class AddSpentComponent implements OnInit, AfterViewInit {
     this.calculateTotal();
   }
 
-  insertNewDate(input) {
+  insertNewDate(dateInput) {
 
-    if (input === undefined || input === '') {
-      this.addNewDate = !this.addNewDate;
+    if (dateInput.targetElement.value === undefined || dateInput.targetElement.value === '') {
+      // this.addNewDate = !this.addNewDate;
       return;
     }
 
-    const date = input?.replace(/[-|\/]/g, '/').split('/');
-    const formattedDate = `${date[1]}/${date[0]}/${date[2]}`;
+    const formattedDate = this.dateParser.parse(dateInput.targetElement.value);
 
-    if (!dayjs(formattedDate, 'DD/MM/YYYY', true).isValid()) {
-      this.addNewDate = !this.addNewDate;
+    if (!dayjs(formattedDate).isValid()) {
+      // this.addNewDate = !this.addNewDate;
       return;
     }
 
@@ -113,13 +691,8 @@ export class AddSpentComponent implements OnInit, AfterViewInit {
       spentList: []
     });
 
-    this.newDateInput = undefined;
-    this.addNewDate = !this.addNewDate
-  }
-
-  animationDone(event: any) {
-    if (event.phaseName === 'done' && event.toState === 'void') {
-      this.reference.destroy();
-    }
+    this.picker.close();
+    this.dateForm.controls['newDateInput'].setErrors(null);
+    this.dateForm.reset();
   }
 }
