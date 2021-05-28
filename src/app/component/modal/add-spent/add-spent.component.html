@@ -8,37 +8,41 @@
 
 <div class="modal-header" mat-dialog-title>
     <span>Adicionar novo gasto</span>
-    <span class="modal-close-button" mat-dialog-close>
+    <span class="modal-close-button" mat-dialog-close matRipple>
         <mat-icon class="material-icons-outlined"> close </mat-icon>
     </span>
 </div>
 
 
-<div class="modal-body" [@.disabled]="disableAnimation">
+<div class="modal-body" [@.disabled]="true">
+
     <mat-dialog-content>
 
         <mat-accordion>
-            <mat-expansion-panel *ngFor="let item of spentInformation">
+            <mat-expansion-panel *ngFor="let spent of spentInformation">
                 <mat-expansion-panel-header>
                     <mat-panel-title>
-                        {{item.spentDate}}
+                        {{spent.spentDate}}
                     </mat-panel-title>
                     <mat-panel-description>
-                        Total {{item.spentTotal | currency: 'BRL'}}
+                        Total {{spent.spentTotal | currency: 'BRL'}}
                     </mat-panel-description>
                 </mat-expansion-panel-header>
 
 
-                <div class="spent-list" *ngFor="let folder of item.spentList">
+                <div matRipple class="spent-list" *ngFor="let spentItem of spent.spentList; let i = index" (click)="openBagulho(spentItem)">
                     <div class="spent-list-item">
-                        <span>{{folder.itemName}}</span>
-                        <span>{{folder.itemDescription}}</span>
+                        <span>{{spentItem.itemName}}</span>
+                        <span>{{spentItem.itemDescription}}</span>
                     </div>
 
-                    <div class="spent-list-item-value">{{folder.itemValue | currency : 'BRL'}}</div>
+                    <div class="spent-list-item-value">
+                        <span>{{spentItem.itemValue | currency : 'BRL'}}</span>
+                    </div>
+
                 </div>
 
-                <form [formGroup]="spentForm">
+                <form [formGroup]="spent.spentForm">
                     <div class="mat-dialog-content">
                         <mat-form-field appearance="outline">
                             <mat-label>Item*</mat-label>
@@ -58,7 +62,7 @@
                     </div>
 
                     <div class="accordion-action-button">
-                        <button class="modal-action-button" mat-button (click)="validateInput(item)" type="button">
+                        <button class="modal-action-button" mat-button (click)="validateInput(spent)" type="button">
                             <div class="button-container">
                                 <span class="material-icons material-icons-round">
                                     <mat-icon>add</mat-icon>
@@ -67,7 +71,6 @@
                             </div>
                         </button>
                     </div>
-
                 </form>
 
                 <div>
@@ -75,26 +78,22 @@
                 </div>
             </mat-expansion-panel>
 
-            <div class="new-date-container" *ngIf="addNewDate">
-                <form [formGroup]="dateForm">
-                    <mat-form-field class="additional-information" appearance="outline">
-                        <mat-label>Nova Data</mat-label>
-                        <input matInput formControlName="newDateInput" (dateChange)="insertNewDate($event)"
-                            [matDatepicker]="picker">
-                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-datepicker touchUi #picker></mat-datepicker>
-                    </mat-form-field>
-                </form>
+            <div class="new-date-container">
+                <mat-form-field class="date-picker-container" appearance="outline">
+                    <mat-label>Nova Data</mat-label>
+                    <input matInput (dateChange)="insertNewDate($event)" [matDatepicker]="picker">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker touchUi #picker></mat-datepicker>
+                </mat-form-field>
+                <button mat-button class="modal-action-button new-date" (click)="picker.open()">
+                    <div class="button-container">
+                        <span class="material-icons material-icons-round">
+                            <mat-icon>add</mat-icon>
+                        </span>
+                        <span>Nova Data</span>
+                    </div>
+                </button>
             </div>
-
-            <button mat-button class="modal-action-button new-date" (click)="addNewDate = !addNewDate">
-                <div class="button-container">
-                    <span class="material-icons material-icons-round">
-                        <mat-icon>add</mat-icon>
-                    </span>
-                    <span>Nova Data</span>
-                </div>
-            </button>
 
         </mat-accordion>
     </mat-dialog-content>

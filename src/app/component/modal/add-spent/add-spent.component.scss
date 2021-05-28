@@ -186,6 +186,10 @@ mat-icon {
 
   .spent-list-item-value {
     font-weight: 500;
+
+    .material-icons {
+      padding-left: 10px;
+    }
   }
 }
 
@@ -211,7 +215,15 @@ mat-icon {
   flex-direction: row;
   padding-top: 10px;
 
+  .date-picker-container {
+    display: none;
+  }
+
   @media (max-width: 320px) {
     flex-direction: column;
   }
+}
+
+.material-icons {
+  cursor: pointer;
 }

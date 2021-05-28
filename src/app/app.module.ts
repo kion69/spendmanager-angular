@@ -22,6 +22,7 @@ import { AddSpentComponent } from './component/modal/add-spent/add-spent.compone
 import { ComponentFactoryService } from './services/component-factory.service';
 import { HeaderComponent } from './component/header/header.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BottomSheetComponent } from './component/bottom-sheet/bottom-sheet.component';
 
 registerLocaleData(localePtBr);
 
@@ -32,6 +33,7 @@ registerLocaleData(localePtBr);
     SideMenuComponent,
     AddSpentComponent,
     HeaderComponent,
+    BottomSheetComponent,
   ],
   imports: [
     CommonModule,

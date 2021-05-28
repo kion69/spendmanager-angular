@@ -1,0 +1,13 @@
+<div class="bottom-sheet-container">
+    <span matRipple class="material-icons material-icons-round close-button" (click)="close()">
+        <mat-icon>close</mat-icon>
+    </span>
+    <div class="bottom-sheet-content">
+        <span>{{spentItem.itemName}}</span>
+        <span>{{spentItem.itemValue | currency : 'BRL'}}</span>
+    </div>
+    <div class="bottom-sheet-footer">
+        <button class="edit-button" mat-button type="button">Editar</button>
+        <button class="delete-button" mat-button type="button">Deletar</button>
+    </div>
+</div>

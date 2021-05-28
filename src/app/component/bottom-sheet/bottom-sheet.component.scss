@@ -1,0 +1,46 @@
+@import '../../../assets/colors.scss';
+
+.bottom-sheet-container {
+
+  font-size: 14pt;
+  display: flex;
+  flex-direction: column;
+  color: $dark;
+
+  .close-button {
+    align-self: flex-end;
+  }
+
+
+  .bottom-sheet-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin: 15px 0;
+  }
+}
+
+button {
+  background-color: $sky-blue-crayola;
+  color: $dark;
+}
+
+.bottom-sheet-footer {
+  display: flex;
+  justify-content: space-evenly;
+
+  button {
+    margin: 0 10px;
+    width: 100%;
+  }
+
+  .edit-button {
+    background-color: $dark;
+    color: #fff;
+  }
+
+  .delete-button {
+    background-color: $red;
+    color: #fff;
+  }
+}
