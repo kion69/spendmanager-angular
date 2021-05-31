@@ -147,6 +147,7 @@ mat-icon {
     span {
       &.material-icons {
         font-size: 15pt;
+        padding: 0 10px;
       }
     }
   }
@@ -157,8 +158,13 @@ mat-icon {
   justify-content: flex-end;
   padding: 10px 0;
 
-  button {
+  .add-button {
     background-color: $sky-blue-crayola;
+    color: $dark;
+  }
+
+  .save-button {
+    background-color: $medium-spring-green;
     color: $dark;
   }
 }
@@ -218,12 +224,27 @@ mat-icon {
   .date-picker-container {
     display: none;
   }
-
-  @media (max-width: 320px) {
-    flex-direction: column;
-  }
 }
 
 .material-icons {
   cursor: pointer;
+}
+
+.edit-container {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+
+  .modal-action-button {
+    margin: 0;
+
+    &.cancel-button {
+      margin-right: 5px;
+      padding: 0;
+    }
+
+    &.save-button {
+      margin-left: 5px;
+    }
+  }
 }

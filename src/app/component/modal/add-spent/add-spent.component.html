@@ -30,7 +30,8 @@
                 </mat-expansion-panel-header>
 
 
-                <div matRipple class="spent-list" *ngFor="let spentItem of spent.spentList; let i = index" (click)="openBagulho(spentItem)">
+                <div matRipple class="spent-list" *ngFor="let spentItem of spent.spentList; let i = index"
+                    (click)="openOptions(spentItem, spent.spentList, spent.spentForm, i)">
                     <div class="spent-list-item">
                         <span>{{spentItem.itemName}}</span>
                         <span>{{spentItem.itemDescription}}</span>
@@ -42,7 +43,7 @@
 
                 </div>
 
-                <form [formGroup]="spent.spentForm">
+                <form [formGroup]="spent.spentForm" #form>
                     <div class="mat-dialog-content">
                         <mat-form-field appearance="outline">
                             <mat-label>Item*</mat-label>
@@ -62,7 +63,8 @@
                     </div>
 
                     <div class="accordion-action-button">
-                        <button class="modal-action-button" mat-button (click)="validateInput(spent)" type="button">
+                        <button class="modal-action-button add-button" mat-button (click)="validateInput(spent)"
+                            type="button" *ngIf="!editingAction">
                             <div class="button-container">
                                 <span class="material-icons material-icons-round">
                                     <mat-icon>add</mat-icon>
@@ -70,6 +72,21 @@
                                 <span>Adicionar</span>
                             </div>
                         </button>
+
+                        <div class="edit-container" *ngIf="editingAction">
+                            <button class="modal-action-button cancel-button" mat-button type="button" (click)="clearForm(spent.spentForm)">
+                                <span>Cancelar</span>
+                            </button>
+                            <button class="modal-action-button save-button" mat-button
+                                (click)="saveItem(spent.spentList, spent.spentForm, spent, i)" type="button">
+                                <div class="button-container">
+                                    <span class="material-icons material-icons-round">
+                                        <mat-icon>edit</mat-icon>
+                                    </span>
+                                    <span>Salvar</span>
+                                </div>
+                            </button>
+                        </div>
                     </div>
                 </form>
 
