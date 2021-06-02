@@ -1,9 +1,13 @@
 @import '../assets/colors.scss';
 
-.content-router {
-  max-height: calc(100vh - (#{$bottom-menu-height} + #{$header-height}));
-  min-height: calc(100vh - (#{$bottom-menu-height} + #{$header-height}));
-  overflow-y: auto;
-  width: 100%;
-  display: block;
+// .content-router {
+//   height: calc(100vh - (#{$bottom-menu-height} + #{$header-height}));
+//   overflow-y: auto;
+// }
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
 }

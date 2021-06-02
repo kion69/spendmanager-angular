@@ -1,91 +1,166 @@
 {
   "2021": {
-    "Maio": [
-      {
-        "totalspent": 9999,
+    "Maio": [{
+        "totalSpent": 9999,
         "spentDate": "10/05/2021",
-        "spentItems": [
-          {
-            "place": "Cadeira",
-            "value": 10123.13
+        "spentList": [{
+            "itemName": "Cadeira",
+            "itemValue": 10123.13,
+            "itemDescription": "Teste abc"
           },
           {
-            "place": "SSD",
-            "value": 1200.99
+            "itemName": "SSD",
+            "itemValue": 1200.99,
+            "itemDescription": "Teste abc"
           },
           {
-            "place": "Bar",
-            "value": 1200
+            "itemName": "Bar",
+            "itemValue": 1200,
+            "itemDescription": "Teste abc"
           },
           {
-            "place": "Presente Aniversário",
-            "value": 1200
+            "itemName": "Presente Aniversário",
+            "itemValue": 1200,
+            "itemDescription": "Teste abc"
           }
         ]
       },
       {
-        "totalspent": 9999,
+        "totalSpent": 9999,
         "spentDate": "12/05/2021",
-        "spentItems": [
-          {
-            "place": "Cadeira",
-            "value": 10123.13
+        "spentList": [{
+            "itemName": "Cadeira",
+            "itemValue": 10123.13,
+            "itemDescription": "Teste abc"
           },
           {
-            "place": "SSD",
-            "value": 1200.99
+            "itemName": "SSD",
+            "itemValue": 1200.99,
+            "itemDescription": "Teste abc"
           },
           {
-            "place": "Bar",
-            "value": 1200
+            "itemName": "Bar",
+            "itemValue": 1200,
+            "itemDescription": "Teste abc"
           },
           {
-            "place": "Presente Aniversário",
-            "value": 1200
+            "itemName": "Presente Aniversário",
+            "itemValue": 1200,
+            "itemDescription": "Teste abc"
           }
         ]
       },
       {
-        "totalspent": 500,
+        "totalSpent": 500,
         "spentDate": "15/05/2021",
-        "spentItems": [
-          {
-            "place": "Mercado",
-            "value": 80
+        "spentList": [{
+            "itemName": "Mercado",
+            "itemValue": 80,
+            "itemDescription": "Teste abc"
           },
           {
-            "place": "Breja",
-            "value": 20
+            "itemName": "Breja",
+            "itemValue": 20,
+            "itemDescription": "Teste abc"
           },
           {
-            "place": "PC",
-            "value": 400
+            "itemName": "PC",
+            "itemValue": 400,
+            "itemDescription": "Teste abc"
           }
         ]
       },
       {
-        "totalspent": 9999,
+        "totalSpent": 9999,
         "spentDate": "18/05/2021",
-        "spentItems": [
-          {
-            "place": "Cadeira",
-            "value": 10123.13
+        "spentList": [{
+            "itemName": "Cadeira",
+            "itemValue": 10123.13,
+            "itemDescription": "Teste abc"
           },
           {
-            "place": "SSD",
-            "value": 1200.99
+            "itemName": "SSD",
+            "itemValue": 1200.99,
+            "itemDescription": "Teste abc"
           },
           {
-            "place": "Bar",
-            "value": 1200
+            "itemName": "Bar",
+            "itemValue": 1200,
+            "itemDescription": "Teste abc"
           },
           {
-            "place": "Presente Aniversário",
-            "value": 1200
+            "itemName": "Presente Aniversário",
+            "itemValue": 1200,
+            "itemDescription": "Teste abc"
           }
         ]
       }
     ],
+    "Junho": [
+      {
+      "id": "J83DD",
+      "totalSpent": 9999,
+      "spentDate": "10/05/2021",
+      "spentForm": {},
+      "spentList": [{
+          "id": 0,
+          "itemName": "Cadeira",
+          "itemValue": 10123.13,
+          "itemDescription": "Teste abc"
+        },
+        {
+          "id": 1,
+          "itemName": "SSD",
+          "itemValue": 1200.99,
+          "itemDescription": "Teste abc"
+        },
+        {
+          "id": 2,
+          "itemName": "Bar",
+          "itemValue": 1200,
+          "itemDescription": "Teste abc"
+        },
+        {
+          "id": 3,
+          "itemName": "Presente Aniversário",
+          "itemValue": 1200,
+          "itemDescription": "Teste abc"
+        }
+      ]
+    },
+    {
+      "id": "SAKD3987",
+      "totalSpent": 9999,
+      "spentDate": "15/05/2021",
+      "spentForm": {},
+      "spentList": [{
+          "id": 0,
+          "itemName": "Cadeira",
+          "itemValue": 10123.13,
+          "itemDescription": "Teste abc"
+        },
+        {
+          "id": 1,
+          "itemName": "SSD",
+          "itemValue": 1200.99,
+          "itemDescription": "Teste abc"
+        },
+        {
+          "id": 2,
+          "itemName": "Bar",
+          "itemValue": 1200,
+          "itemDescription": "Teste abc"
+        },
+        {
+          "id": 3,
+          "itemName": "Presente Aniversário",
+          "itemValue": 1200,
+          "itemDescription": "Teste abc"
+        }
+      ]
+    }
+  ],
     "totalSpentInMonth": "somatória de todos os gastos"
+
   }
 }

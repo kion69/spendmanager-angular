@@ -192,6 +192,7 @@ mat-icon {
 
   .spent-list-item-value {
     font-weight: 500;
+    user-select: none;
 
     .material-icons {
       padding-left: 10px;

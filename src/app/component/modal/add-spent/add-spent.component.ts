@@ -1,7 +1,9 @@
-import { AfterViewInit, Component, ComponentRef, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Inject } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatAccordion, MatExpansionPanel } from '@angular/material/expansion';
 import dayjs from 'dayjs';
 import { BottomSheetActions } from 'src/app/enum/bottom-sheet';
 import { DateParseService } from 'src/app/services/date-parse.service';
@@ -16,7 +18,8 @@ import { BottomSheetComponent } from '../../bottom-sheet/bottom-sheet.component'
   animations: [verticalSlideAnimation],
   host: {
     '(@verticalSlideAnimation.done)': 'animationDone($event)'
-  }
+  },
+  viewProviders: [MatExpansionPanel]
 })
 export class AddSpentComponent implements OnInit {
 
@@ -29,11 +32,14 @@ export class AddSpentComponent implements OnInit {
   editingItem: any;
 
   @ViewChild('picker') picker;
-  @ViewChild('form') form: ElementRef;
+  @ViewChild(MatAccordion) accordion: MatAccordion;
 
   constructor(
     private dateParser: DateParseService,
-    private bottomSheet: MatBottomSheet) {
+    private bottomSheet: MatBottomSheet,
+    private dialogRef: MatDialogRef<AddSpentComponent>,
+    @Inject(MAT_DIALOG_DATA) private dialogParameters) {
+
     this.newDateInput = '';
     this.addNewDate = false;
     this.disableAnimation = true;
@@ -43,86 +49,18 @@ export class AddSpentComponent implements OnInit {
       newDateInput: ['']
     });
 
-    this.spentInformation = [
-      {
-        id: '2873YEUB',
-        spentDate: dayjs().format('13/05/2021'),
-        spentTotal: 0,
-        spentForm: new FormBuilder().group({
-          itemName: ['', Validators.required],
-          itemValue: ['', Validators.required],
-          itemDescription: ['']
-        }),
-        spentList: [
-          {
-            id: Math.ceil(Math.random() * 100),
-            itemName: 'Cadeira',
-            itemValue: 123,
-            itemDescription: ''
-          },
-          {
-            id: Math.ceil(Math.random() * 100),
-            itemName: 'Cafeteira',
-            itemValue: 12,
-            itemDescription: 'Magica'
-          },
-          {
-            id: Math.ceil(Math.random() * 100),
-            itemName: 'Frigideira',
-            itemValue: 123,
-            itemDescription: 'Isso ae'
-          },
-          {
-            id: Math.ceil(Math.random() * 100),
-            itemName: 'Cadeira',
-            itemValue: 123,
-            itemDescription: ''
-          },
-          {
-            id: Math.ceil(Math.random() * 100),
-            itemName: 'Frigideira',
-            itemValue: 123,
-            itemDescription: 'Isso ae'
-          },
-        ]
-      },
-      {
-        id: '09EJQONWD',
-        spentDate: dayjs().format('15/05/2021'),
-        spentTotal: 0,
-        spentForm: new FormBuilder().group({
-          itemName: ['', Validators.required],
-          itemValue: ['', Validators.required],
-          itemDescription: ['']
-        }),
-        spentList: [
-          {
-            itemName: 'Cadeira',
-            itemValue: 123,
-            itemDescription: ''
-          },
-          {
-            itemName: 'Cafeteira',
-            itemValue: 12,
-            itemDescription: 'Magica'
-          },
-          {
-            itemName: 'Frigideira',
-            itemValue: 123,
-            itemDescription: 'Isso ae'
-          },
-          {
-            itemName: 'Cadeira',
-            itemValue: 123,
-            itemDescription: ''
-          },
-          {
-            itemName: 'Frigideira',
-            itemValue: 123,
-            itemDescription: 'Isso ae'
-          },
-        ]
-      }];
+    if (this.dialogParameters) {
+      const form = new FormGroup({});
+
+      form.addControl('itemName', new FormControl('', Validators.required));
+      form.addControl('itemValue', new FormControl('', Validators.required));
+      form.addControl('itemDescription', new FormControl(''));
+
+      this.dialogParameters.spentForm = form;
+      this.spentInformation = [this.dialogParameters]
+    } else {
+      this.spentInformation = [];
+    }
   }
 
   ngOnInit(): void {
@@ -140,6 +78,7 @@ export class AddSpentComponent implements OnInit {
     const itemName = currentList.spentForm.controls['itemName'];
     const itemValue = currentList.spentForm.controls['itemValue'];
     const itemDescription = currentList.spentForm.controls['itemDescription'];
+    currentList.spentForm.patchValue();
 
     if (itemName.valid && itemValue.valid) {
       currentList.spentList.push({
@@ -156,14 +95,12 @@ export class AddSpentComponent implements OnInit {
 
   insertNewDate(dateInput) {
     if (dateInput.targetElement.value === undefined || dateInput.targetElement.value === '') {
-      // this.addNewDate = !this.addNewDate;
       return;
     }
 
     const formattedDate = this.dateParser.parse(dateInput.targetElement.value);
 
     if (!dayjs(formattedDate).isValid()) {
-      // this.addNewDate = !this.addNewDate;
       return;
     }
 
@@ -178,7 +115,6 @@ export class AddSpentComponent implements OnInit {
       spentList: []
     });
 
-    // this.picker.close();
     this.dateForm.reset();
   }
 
@@ -209,6 +145,11 @@ export class AddSpentComponent implements OnInit {
   }
 
   openOptions(spentItem, spentList, spentForm, index) {
+    console.log(index);
+
+    const activeAccordion = this.accordion._headers.find(header => header._isExpanded());
+    const accordionBodyContent = activeAccordion.panel._body.nativeElement.querySelector('.mat-expansion-panel-body');
+
     this.bottomSheet.open(BottomSheetComponent, {
       data: spentItem,
     }).afterDismissed().subscribe(result => {
@@ -217,10 +158,10 @@ export class AddSpentComponent implements OnInit {
 
       switch (action) {
         case BottomSheetActions.EDIT_ITEM:
-          (this.form.nativeElement as HTMLElement).scrollTop = 999;
           this.editingAction = true;
           this.editingItem = { spentItem, spentList, spentForm, index }
           this.editItem(spentItem, spentList, spentForm);
+          accordionBodyContent.scrollTo({ behavior: 'smooth', top: accordionBodyContent.scrollHeight });
           break;
 
         case BottomSheetActions.DELETE_ITEM:
@@ -230,5 +171,9 @@ export class AddSpentComponent implements OnInit {
           break;
       }
     });
+  }
+
+  closeDialog() {
+    this.dialogRef.close(this.spentInformation);
   }
 }

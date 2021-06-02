@@ -26,7 +26,7 @@ export class HeaderComponent implements OnInit {
     const spentOfMonth: [] = this.spentData[this.currentYear][this.currentMonth];
 
     spentOfMonth.map((item: any) => {
-      item.totalSpent = item.spentItems.reduce((counter: number, currentValue: any) => counter + currentValue.value, 0);
+      item.totalSpent = item.spentList.reduce((counter: number, currentValue: any) => counter + currentValue.itemValue, 0);
       this.totalSpent += item.totalSpent;
     });
   }

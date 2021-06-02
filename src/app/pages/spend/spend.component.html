@@ -1,19 +1,19 @@
 <div class="spend-body">
 
-    <mat-card *ngFor="let spent of spentData; let count = count">
+    <mat-card matRipple *ngFor="let spent of spentInformation" (click)="inspectCurrentSpent(spent)">
+        <div>
+            <mat-card-header>
+                <mat-card-title>{{spent.spentDate}}</mat-card-title>
+                <mat-card-subtitle>Total {{spent.totalSpent | currency:'BRL'}}</mat-card-subtitle>
+            </mat-card-header>
 
-        <mat-card-header>
-            <mat-card-title>{{spent.spentDate}}</mat-card-title>
-            <mat-card-subtitle>Total {{spent.totalSpent | currency:'BRL'}}</mat-card-subtitle>
-        </mat-card-header>
-
-        <mat-card-content>
-            <div class="spent-info" *ngFor="let item of spent.spentItems">
-                <span>{{item.place}}</span>
-                <span>{{item.value | currency:'BRL'}}</span>
-            </div>
-        </mat-card-content>
-
+            <mat-card-content>
+                <div class="spent-info" *ngFor="let spentItem of spent.spentList">
+                    <span>{{spentItem.itemName}}</span>
+                    <span>{{spentItem.itemValue | currency:'BRL'}}</span>
+                </div>
+            </mat-card-content>
+        </div>
     </mat-card>
 </div>
 

@@ -2,13 +2,11 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 import { BottomSheetActions } from 'src/app/enum/bottom-sheet';
-import { expandPanel } from 'src/assets/animations/expand';
 
 @Component({
   selector: 'app-bottom-sheet',
   templateUrl: './bottom-sheet.component.html',
-  styleUrls: ['./bottom-sheet.component.scss'],
-  animations: [expandPanel]
+  styleUrls: ['./bottom-sheet.component.scss']
 })
 export class BottomSheetComponent implements OnInit {
 

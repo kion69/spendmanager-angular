@@ -18,7 +18,6 @@ import { SideMenuComponent } from './component/side-menu/side-menu.component';
 import { EventEmitterService } from './services/event-emitter.service';
 import localePtBr from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
-import { AddSpentComponent } from './component/modal/add-spent/add-spent.component';
 import { ComponentFactoryService } from './services/component-factory.service';
 import { HeaderComponent } from './component/header/header.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -31,7 +30,6 @@ registerLocaleData(localePtBr);
     AppComponent,
     NavigationMenuComponent,
     SideMenuComponent,
-    AddSpentComponent,
     HeaderComponent,
     BottomSheetComponent,
   ],

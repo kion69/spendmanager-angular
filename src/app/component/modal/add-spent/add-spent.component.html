@@ -8,7 +8,7 @@
 
 <div class="modal-header" mat-dialog-title>
     <span>Adicionar novo gasto</span>
-    <span class="modal-close-button" mat-dialog-close matRipple>
+    <span class="modal-close-button" matRipple (click)="closeDialog()">
         <mat-icon class="material-icons-outlined"> close </mat-icon>
     </span>
 </div>
@@ -29,72 +29,74 @@
                     </mat-panel-description>
                 </mat-expansion-panel-header>
 
+                <div #form>
+                    <div matRipple class="spent-list" *ngFor="let spentItem of spent.spentList; let i = index" longPress
+                        (onLongPress)="openOptions(spentItem, spent.spentList, spent.spentForm, spent)">
+                        <div class="spent-list-item">
+                            <span>{{spentItem.itemName}}</span>
+                            <span>{{spentItem.itemDescription}}</span>
+                        </div>
 
-                <div matRipple class="spent-list" *ngFor="let spentItem of spent.spentList; let i = index"
-                    (click)="openOptions(spentItem, spent.spentList, spent.spentForm, i)">
-                    <div class="spent-list-item">
-                        <span>{{spentItem.itemName}}</span>
-                        <span>{{spentItem.itemDescription}}</span>
+                        <div class="spent-list-item-value">
+                            <span>{{spentItem.itemValue | currency : 'BRL'}}</span>
+                        </div>
+
                     </div>
 
-                    <div class="spent-list-item-value">
-                        <span>{{spentItem.itemValue | currency : 'BRL'}}</span>
-                    </div>
+                    <form [formGroup]="spent.spentForm">
+                        <div class="mat-dialog-content">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Item*</mat-label>
+                                <input formControlName="itemName" matInput>
+                            </mat-form-field>
 
-                </div>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Valor*</mat-label>
+                                <input formControlName="itemValue" matInput number>
+                                <mat-icon class="material-icons-outlined" matSuffix>paid</mat-icon>
+                            </mat-form-field>
 
-                <form [formGroup]="spent.spentForm" #form>
-                    <div class="mat-dialog-content">
-                        <mat-form-field appearance="outline">
-                            <mat-label>Item*</mat-label>
-                            <input formControlName="itemName" matInput>
-                        </mat-form-field>
+                            <mat-form-field class="additional-information" appearance="outline">
+                                <mat-label>Descrição</mat-label>
+                                <input formControlName="itemDescription" matInput number placeholder="Breve descrição">
+                            </mat-form-field>
+                        </div>
 
-                        <mat-form-field appearance="outline">
-                            <mat-label>Valor*</mat-label>
-                            <input formControlName="itemValue" matInput number>
-                            <mat-icon class="material-icons-outlined" matSuffix>paid</mat-icon>
-                        </mat-form-field>
-
-                        <mat-form-field class="additional-information" appearance="outline">
-                            <mat-label>Descrição</mat-label>
-                            <input formControlName="itemDescription" matInput number placeholder="Breve descrição">
-                        </mat-form-field>
-                    </div>
-
-                    <div class="accordion-action-button">
-                        <button class="modal-action-button add-button" mat-button (click)="validateInput(spent)"
-                            type="button" *ngIf="!editingAction">
-                            <div class="button-container">
-                                <span class="material-icons material-icons-round">
-                                    <mat-icon>add</mat-icon>
-                                </span>
-                                <span>Adicionar</span>
-                            </div>
-                        </button>
-
-                        <div class="edit-container" *ngIf="editingAction">
-                            <button class="modal-action-button cancel-button" mat-button type="button" (click)="clearForm(spent.spentForm)">
-                                <span>Cancelar</span>
-                            </button>
-                            <button class="modal-action-button save-button" mat-button
-                                (click)="saveItem(spent.spentList, spent.spentForm, spent, i)" type="button">
+                        <div class="accordion-action-button">
+                            <button class="modal-action-button add-button" mat-button (click)="validateInput(spent)"
+                                type="button" *ngIf="!editingAction">
                                 <div class="button-container">
                                     <span class="material-icons material-icons-round">
-                                        <mat-icon>edit</mat-icon>
+                                        <mat-icon>add</mat-icon>
                                     </span>
-                                    <span>Salvar</span>
+                                    <span>Adicionar</span>
                                 </div>
                             </button>
+
+                            <div class="edit-container" *ngIf="editingAction">
+                                <button class="modal-action-button cancel-button" mat-button type="button"
+                                    (click)="clearForm(spent.spentForm)">
+                                    <span>Cancelar</span>
+                                </button>
+                                <button class="modal-action-button save-button" mat-button
+                                    (click)="saveItem(spent.spentList, spent.spentForm, spent, i)" type="button">
+                                    <div class="button-container">
+                                        <span class="material-icons material-icons-round">
+                                            <mat-icon>edit</mat-icon>
+                                        </span>
+                                        <span>Salvar</span>
+                                    </div>
+                                </button>
+                            </div>
                         </div>
+                    </form>
+
+                    <div>
+                        <h5>* campos obrigatórios</h5>
                     </div>
-                </form>
-
-                <div>
-                    <h5>* campos obrigatórios</h5>
                 </div>
-            </mat-expansion-panel>
 
+            </mat-expansion-panel>
             <div class="new-date-container">
                 <mat-form-field class="date-picker-container" appearance="outline">
                     <mat-label>Nova Data</mat-label>

@@ -1,7 +1,7 @@
 <div class="bottom-sheet-container">
-    <span matRipple class="material-icons material-icons-round close-button" (click)="close(-1)">
-        <mat-icon>close</mat-icon>
-    </span>
+    <button class="material-icons close-button" mat-button type="button" (click)="close(-1)">
+        <mat-icon class="material-icons-outlined"> close </mat-icon>
+    </button>
     <span class="message">Você está editando:</span>
     <div class="bottom-sheet-content">
         <span>{{spentItem.itemName}}</span>

@@ -4,6 +4,7 @@ import { default as spentDataJSON } from '../../../app/mock/spent.mock.json';
 import { AddSpentComponent } from 'src/app/component/modal/add-spent/add-spent.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ViewEncapsulation } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-spend',
@@ -14,21 +15,20 @@ import { ViewEncapsulation } from '@angular/core';
 export class SpendComponent implements OnInit {
 
   currentMonth: string;
-  totalSpent: number;
-  spentData: any; //Needs to create an Interface
+  spentInformation: any;
+  spentData: any; //Needs to create an Interface  
+  meusFormis = [];
 
   constructor(
-    // private viewContainerHost: ViewContainerRef,
-    // private factoryService: ComponentFactoryService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private http: HttpClient
   ) {
-
     this.currentMonth = dayjs().format('MMMM');
-    const currentYear = dayjs().year();
-    this.spentData = spentDataJSON[currentYear][this.currentMonth];
   }
 
   ngOnInit(): void {
+    const currentYear = dayjs().year();
+    this.spentInformation = spentDataJSON[currentYear][this.currentMonth];
   }
 
   addSpent() {
@@ -37,5 +37,24 @@ export class SpendComponent implements OnInit {
       width: '500px',
       maxWidth: '90vw'
     })
+  }
+
+  inspectCurrentSpent(spent) {
+    this.dialog.open(AddSpentComponent, {
+      data: {
+        ...spent,
+        spentList: Array.from(spent.spentList)
+      },
+      minHeight: '500px',
+      width: '500px',
+      maxWidth: '90vw'
+    }).afterClosed()
+      .subscribe(
+        result => {
+          if (result) {
+            const itemClicked = this.spentInformation.find(items => items.id === result[0].id);
+            itemClicked.spentList = result[0].spentList;
+          }
+        });
   }
 }

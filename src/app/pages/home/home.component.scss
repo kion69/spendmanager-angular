@@ -3,12 +3,12 @@
 .home-content {
   max-width: 800px;
 
-  @media (min-width: 900px) {
-    margin: auto;
-  }
+  // @media (min-width: 900px) {
+  //   margin: auto;
+  // }
 
-  @media (max-width: 900px) {
-    @include global-margin;
-  }
+  // @media (max-width: 900px) {
+  //   @include global-margin;
+  // }
 
 }
