@@ -1,6 +1,12 @@
 <div class="spend-body">
 
-    <mat-card matRipple *ngFor="let spent of spentInformation" (click)="inspectCurrentSpent(spent)">
+    <app-card 
+       
+        [contentList]="spentInformation"
+>
+    </app-card>
+
+    <!-- <mat-card matRipple *ngFor="let spent of spentInformation" (click)="inspectCurrentSpent(spent)">
         <div>
             <mat-card-header>
                 <mat-card-title>{{spent.spentDate}}</mat-card-title>
@@ -14,13 +20,12 @@
                 </div>
             </mat-card-content>
         </div>
-    </mat-card>
-</div>
+    </mat-card> -->
 
-<div class="action-button">
-    <button mat-mini-fab (click)="addSpent()">
-        <span class="material-icons-outlined">
-            <mat-icon>add</mat-icon>
-        </span>
-    </button>
-</div>
+    <div class="action-button">
+        <button mat-mini-fab (click)="addSpent()">
+            <span class="material-icons-outlined">
+                <mat-icon>add</mat-icon>
+            </span>
+        </button>
+    </div>

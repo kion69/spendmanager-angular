@@ -146,8 +146,6 @@ export class AddSpentComponent implements OnInit {
   }
 
   openOptions(spentItem, spentList, spentForm, index) {
-    console.log(index);
-
     const activeAccordion = this.accordion._headers.find(header => header._isExpanded());
     const accordionBodyContent = activeAccordion.panel._body.nativeElement.querySelector('.mat-expansion-panel-body');
 

@@ -1,7 +1,33 @@
 @import '../../../assets/colors.scss';
 
-.card-class {
-  margin: 25px;
-  min-width: 150px;
-  color: $skobeloff;
+
+:host ,app-card {
+  display: grid;
+  grid-gap: 15px;
+  padding: 25px 0 55px;
+  max-width: 800px;
+  margin: auto;
+}
+
+mat-card-header {
+  mat-card-title {
+    color: $dark;
+  }
+}
+
+mat-card {
+  ::ng-deep .mat-card-header-text {
+    margin: 0
+  }
+}
+
+.spent-info {
+  display: grid;
+  grid-template-columns: auto auto;
+  color: $dark;
+  justify-content: space-between;
+
+  span:nth-child(2) {
+    font-weight: 500;
+  }
 }

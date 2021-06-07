@@ -4,7 +4,6 @@ import { default as spentDataJSON } from '../../../app/mock/spent.mock.json';
 import { AddSpentComponent } from 'src/app/component/modal/add-spent/add-spent.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ViewEncapsulation } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { EventEmitterService } from 'src/app/services/event-emitter.service';
 import { Constants } from 'src/app/constants/event-emitter';
 
@@ -19,7 +18,7 @@ export class SpendComponent implements OnInit {
   currentMonth: string;
   spentInformation: any[];
   spentData: any; //Needs to create an Interface  
-  meusFormis = [];
+  contentList: any;
 
   constructor(
     private dialog: MatDialog,
@@ -63,9 +62,8 @@ export class SpendComponent implements OnInit {
       .subscribe(
         result => {
           if (result) {
-            const itemClicked = this.spentInformation.find(items => items.id === result[0].id);
-            itemClicked.spentList = result[0].spentList;
-            this.eventEmitter.setValue(Constants.HEADER_SPENT_TOTAL, this.spentInformation);
+            this.contentList.spentList = result[0].spentList;
+            this.eventEmitter.setValue(Constants.HEADER_SPENT_TOTAL, this.contentList);
           }
         });
   }
