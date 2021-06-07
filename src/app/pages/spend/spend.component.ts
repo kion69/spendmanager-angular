@@ -5,6 +5,8 @@ import { AddSpentComponent } from 'src/app/component/modal/add-spent/add-spent.c
 import { MatDialog } from '@angular/material/dialog';
 import { ViewEncapsulation } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { EventEmitterService } from 'src/app/services/event-emitter.service';
+import { Constants } from 'src/app/constants/event-emitter';
 
 @Component({
   selector: 'app-spend',
@@ -15,13 +17,13 @@ import { HttpClient } from '@angular/common/http';
 export class SpendComponent implements OnInit {
 
   currentMonth: string;
-  spentInformation: any;
+  spentInformation: any[];
   spentData: any; //Needs to create an Interface  
   meusFormis = [];
 
   constructor(
     private dialog: MatDialog,
-    private http: HttpClient
+    private eventEmitter: EventEmitterService
   ) {
     this.currentMonth = dayjs().format('MMMM');
   }
@@ -29,6 +31,8 @@ export class SpendComponent implements OnInit {
   ngOnInit(): void {
     const currentYear = dayjs().year();
     this.spentInformation = spentDataJSON[currentYear][this.currentMonth];
+    // Após retornar os dados do banco de dados, realizar a chamada para atualizar o cabeçalho
+    this.eventEmitter.setValue(Constants.HEADER_SPENT_TOTAL, this.spentInformation);
   }
 
   addSpent() {
@@ -36,7 +40,14 @@ export class SpendComponent implements OnInit {
       minHeight: '500px',
       width: '500px',
       maxWidth: '90vw'
-    })
+    }).afterClosed()
+      .subscribe(
+        result => {
+          if (result) {
+            this.spentInformation.push.apply(this.spentInformation, result);
+            this.eventEmitter.setValue(Constants.HEADER_SPENT_TOTAL, this.spentInformation);
+          }
+        });
   }
 
   inspectCurrentSpent(spent) {
@@ -54,6 +65,7 @@ export class SpendComponent implements OnInit {
           if (result) {
             const itemClicked = this.spentInformation.find(items => items.id === result[0].id);
             itemClicked.spentList = result[0].spentList;
+            this.eventEmitter.setValue(Constants.HEADER_SPENT_TOTAL, this.spentInformation);
           }
         });
   }

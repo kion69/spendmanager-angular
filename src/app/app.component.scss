@@ -1,13 +1,13 @@
 @import '../assets/colors.scss';
 
-// .content-router {
-//   height: calc(100vh - (#{$bottom-menu-height} + #{$header-height}));
-//   overflow-y: auto;
-// }
+.content-router {
+  height: calc(100vh - (#{$bottom-menu-height} + #{$header-height}));
+  overflow-y: auto;
+}
 
 .main-content {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100vh;
+  // height: 100vh;
 }

@@ -5,22 +5,22 @@
         "spentDate": "10/05/2021",
         "spentList": [{
             "itemName": "Cadeira",
-            "itemValue": 10123.13,
+            "itemValue": 1,
             "itemDescription": "Teste abc"
           },
           {
             "itemName": "SSD",
-            "itemValue": 1200.99,
+            "itemValue": 1,
             "itemDescription": "Teste abc"
           },
           {
             "itemName": "Bar",
-            "itemValue": 1200,
+            "itemValue": 1,
             "itemDescription": "Teste abc"
           },
           {
             "itemName": "Presente Aniversário",
-            "itemValue": 1200,
+            "itemValue": 1,
             "itemDescription": "Teste abc"
           }
         ]
@@ -30,22 +30,22 @@
         "spentDate": "12/05/2021",
         "spentList": [{
             "itemName": "Cadeira",
-            "itemValue": 10123.13,
+            "itemValue": 1,
             "itemDescription": "Teste abc"
           },
           {
             "itemName": "SSD",
-            "itemValue": 1200.99,
+            "itemValue": 1,
             "itemDescription": "Teste abc"
           },
           {
             "itemName": "Bar",
-            "itemValue": 1200,
+            "itemValue": 1,
             "itemDescription": "Teste abc"
           },
           {
             "itemName": "Presente Aniversário",
-            "itemValue": 1200,
+            "itemValue": 1,
             "itemDescription": "Teste abc"
           }
         ]
@@ -55,17 +55,17 @@
         "spentDate": "15/05/2021",
         "spentList": [{
             "itemName": "Mercado",
-            "itemValue": 80,
+            "itemValue": 1,
             "itemDescription": "Teste abc"
           },
           {
             "itemName": "Breja",
-            "itemValue": 20,
+            "itemValue": 1,
             "itemDescription": "Teste abc"
           },
           {
             "itemName": "PC",
-            "itemValue": 400,
+            "itemValue": 1,
             "itemDescription": "Teste abc"
           }
         ]
@@ -75,22 +75,22 @@
         "spentDate": "18/05/2021",
         "spentList": [{
             "itemName": "Cadeira",
-            "itemValue": 10123.13,
+            "itemValue": 1,
             "itemDescription": "Teste abc"
           },
           {
             "itemName": "SSD",
-            "itemValue": 1200.99,
+            "itemValue": 1,
             "itemDescription": "Teste abc"
           },
           {
             "itemName": "Bar",
-            "itemValue": 1200,
+            "itemValue": 1,
             "itemDescription": "Teste abc"
           },
           {
             "itemName": "Presente Aniversário",
-            "itemValue": 1200,
+            "itemValue": 1,
             "itemDescription": "Teste abc"
           }
         ]
@@ -105,25 +105,25 @@
       "spentList": [{
           "id": 0,
           "itemName": "Cadeira",
-          "itemValue": 10123.13,
+          "itemValue": 1,
           "itemDescription": "Teste abc"
         },
         {
           "id": 1,
           "itemName": "SSD",
-          "itemValue": 1200.99,
+          "itemValue": 1,
           "itemDescription": "Teste abc"
         },
         {
           "id": 2,
           "itemName": "Bar",
-          "itemValue": 1200,
+          "itemValue": 1,
           "itemDescription": "Teste abc"
         },
         {
           "id": 3,
           "itemName": "Presente Aniversário",
-          "itemValue": 1200,
+          "itemValue": 1,
           "itemDescription": "Teste abc"
         }
       ]
@@ -136,25 +136,25 @@
       "spentList": [{
           "id": 0,
           "itemName": "Cadeira",
-          "itemValue": 10123.13,
+          "itemValue": 1,
           "itemDescription": "Teste abc"
         },
         {
           "id": 1,
           "itemName": "SSD",
-          "itemValue": 1200.99,
+          "itemValue": 1,
           "itemDescription": "Teste abc"
         },
         {
           "id": 2,
           "itemName": "Bar",
-          "itemValue": 1200,
+          "itemValue": 1,
           "itemDescription": "Teste abc"
         },
         {
           "id": 3,
           "itemName": "Presente Aniversário",
-          "itemValue": 1200,
+          "itemValue": 1,
           "itemDescription": "Teste abc"
         }
       ]

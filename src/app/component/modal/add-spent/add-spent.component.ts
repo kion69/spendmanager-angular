@@ -38,7 +38,7 @@ export class AddSpentComponent implements OnInit {
     private dateParser: DateParseService,
     private bottomSheet: MatBottomSheet,
     private dialogRef: MatDialogRef<AddSpentComponent>,
-    @Inject(MAT_DIALOG_DATA) private dialogParameters) {
+    @Inject(MAT_DIALOG_DATA) public dialogParameters) {
 
     this.newDateInput = '';
     this.addNewDate = false;
@@ -133,10 +133,11 @@ export class AddSpentComponent implements OnInit {
     const { index } = this.editingItem;
     list[index] = {
       itemName: form.controls['itemName'].value,
-      itemValue: form.controls['itemValue'].value,
+      itemValue: Number(form.controls['itemValue'].value),
       itemDescription: form.controls['itemDescription'].value
     }
     this.calculateTotal();
+    this.clearForm(form);
   }
 
   clearForm(form: FormGroup) {

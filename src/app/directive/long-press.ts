@@ -13,7 +13,7 @@ export class LongPressDirective {
     onMouseDown() {
         this.timeOut = setTimeout(() => {
             this.onLongPress.emit(null);
-        }, 500);
+        }, 300);
     }
 
     @HostListener('touchend', ['$event'])

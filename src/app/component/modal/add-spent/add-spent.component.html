@@ -31,7 +31,7 @@
 
                 <div #form>
                     <div matRipple class="spent-list" *ngFor="let spentItem of spent.spentList; let i = index" longPress
-                        (onLongPress)="openOptions(spentItem, spent.spentList, spent.spentForm, spent)">
+                        (onLongPress)="openOptions(spentItem, spent.spentList, spent.spentForm, i)">
                         <div class="spent-list-item">
                             <span>{{spentItem.itemName}}</span>
                             <span>{{spentItem.itemDescription}}</span>
@@ -104,7 +104,7 @@
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker touchUi #picker></mat-datepicker>
                 </mat-form-field>
-                <button mat-button class="modal-action-button new-date" (click)="picker.open()">
+                <button mat-button class="modal-action-button new-date" (click)="picker.open()" *ngIf="!dialogParameters">
                     <div class="button-container">
                         <span class="material-icons material-icons-round">
                             <mat-icon>add</mat-icon>
