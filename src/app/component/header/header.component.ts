@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import dayjs from 'dayjs';
-import { Constants } from 'src/app/constants/event-emitter';
-import { EventEmitterService } from 'src/app/services/event-emitter.service';
+import { Constants } from '../app/constants/event-emitter';
+import { EventEmitterService } from '../app/services/event-emitter.service';
 import { default as spentDataJSON } from '../../../app/mock/spent.mock.json';
 
 @Component({

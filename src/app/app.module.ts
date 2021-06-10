@@ -22,6 +22,9 @@ import { ComponentFactoryService } from './services/component-factory.service';
 import { HeaderComponent } from './component/header/header.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BottomSheetComponent } from './component/bottom-sheet/bottom-sheet.component';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 registerLocaleData(localePtBr);
 
@@ -50,7 +53,10 @@ registerLocaleData(localePtBr);
     SpendModule,
     SharedModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAnalyticsModule,
+    AngularFireDatabaseModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'pt' },

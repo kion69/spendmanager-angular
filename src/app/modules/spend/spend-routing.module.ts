@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SpendComponent } from 'src/app/pages/spend/spend.component';
+import { SpendComponent } from '../app/pages/spend/spend.component';
 
 const routes: Routes = [
   { path: '', component: SpendComponent },

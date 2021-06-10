@@ -5,9 +5,9 @@ import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatAccordion, MatExpansionPanel } from '@angular/material/expansion';
 import dayjs from 'dayjs';
-import { BottomSheetActions } from 'src/app/enum/bottom-sheet';
-import { DateParseService } from 'src/app/services/date-parse.service';
-import { verticalSlideAnimation } from 'src/assets/animations/slide';
+import { BottomSheetActions } from '../app/enum/bottom-sheet';
+import { DateParseService } from '../app/services/date-parse.service';
+import { verticalSlideAnimation } from '../assets/animations/slide';
 import { BottomSheetComponent } from '../../bottom-sheet/bottom-sheet.component';
 
 

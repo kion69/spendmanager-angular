@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { routeAnimation } from 'src/assets/animations/route-animation';
+import { routeAnimation } from '../assets/animations/route-animation';
 import dayjs from 'dayjs';
 import * as pt from 'dayjs/locale/pt-br';
 

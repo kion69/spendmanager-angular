@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import dayjs from 'dayjs';
 import { default as spentDataJSON } from '../../../app/mock/spent.mock.json';
-import { AddSpentComponent } from 'src/app/component/modal/add-spent/add-spent.component';
+import { AddSpentComponent } from '../app/component/modal/add-spent/add-spent.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ViewEncapsulation } from '@angular/core';
-import { EventEmitterService } from 'src/app/services/event-emitter.service';
-import { Constants } from 'src/app/constants/event-emitter';
+import { EventEmitterService } from '../app/services/event-emitter.service';
+import { Constants } from '../app/constants/event-emitter';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+import { AngularFireDatabase } from '@angular/fire/database';
 
 @Component({
   selector: 'app-spend',
@@ -19,12 +22,15 @@ export class SpendComponent implements OnInit {
   spentInformation: any[];
   spentData: any; //Needs to create an Interface  
   contentList: any;
+  item: Observable<any[]>;
 
   constructor(
     private dialog: MatDialog,
-    private eventEmitter: EventEmitterService
+    private eventEmitter: EventEmitterService,
+    database: AngularFireDatabase
   ) {
     this.currentMonth = dayjs().format('MMMM');
+    database.list(database.database.ref()).valueChanges(['child_added']).subscribe(x => console.log('yyy', x));
   }
 
   ngOnInit(): void {
