@@ -1,5 +1,5 @@
 import { Component, ComponentRef, OnInit, ViewContainerRef } from '@angular/core';
-import { ComponentFactoryService } from '../app/services/component-factory.service';
+import { ComponentFactoryService } from '../../services/component-factory.service';
 
 @Component({
   selector: 'app-home',

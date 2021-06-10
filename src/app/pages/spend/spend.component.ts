@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import dayjs from 'dayjs';
-import { default as spentDataJSON } from '../../../app/mock/spent.mock.json';
-import { AddSpentComponent } from '../app/component/modal/add-spent/add-spent.component';
+import { default as spentDataJSON } from '../../mock/spent.mock.json';
+import { AddSpentComponent } from '../../component/modal/add-spent/add-spent.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ViewEncapsulation } from '@angular/core';
-import { EventEmitterService } from '../app/services/event-emitter.service';
-import { Constants } from '../app/constants/event-emitter';
+import { EventEmitterService } from '../../services/event-emitter.service';
+import { Constants } from '../../constants/event-emitter';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { AngularFireDatabase } from '@angular/fire/database';

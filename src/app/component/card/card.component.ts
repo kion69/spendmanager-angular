@@ -1,9 +1,8 @@
-import { EventEmitter } from '@angular/core';
-import { Input, Output } from '@angular/core';
+import { Input } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Constants } from '../app/constants/event-emitter';
-import { EventEmitterService } from '../app/services/event-emitter.service';
+import { Constants } from '../../constants/event-emitter';
+import { EventEmitterService } from '../../services/event-emitter.service';
 import { AddSpentComponent } from '../modal/add-spent/add-spent.component';
 
 @Component({

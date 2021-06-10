@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Constants } from '../app/constants/event-emitter';
-import { EventEmitterService } from '../app/services/event-emitter.service';
-import { verticalSlideAnimation } from '../assets/animations/slide';
+import { verticalSlideAnimation } from '../../../assets/animations/slide';
+import { Constants } from '../../constants/event-emitter';
+import { EventEmitterService } from '../../services/event-emitter.service';
+
 
 @Component({
   selector: 'app-navigation-menu',

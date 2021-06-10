@@ -1,8 +1,8 @@
 import { ViewEncapsulation } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
-import { Constants } from '../app/constants/event-emitter';
-import { EventEmitterService } from '../app/services/event-emitter.service';
-import { horizontalSlideAnimation } from '../assets/animations/slide';
+import { horizontalSlideAnimation } from '../../../assets/animations/slide';
+import { Constants } from '../../constants/event-emitter';
+import { EventEmitterService } from '../../services/event-emitter.service';
 
 @Component({
   selector: 'app-side-menu',
