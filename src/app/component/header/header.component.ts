@@ -36,7 +36,7 @@ export class HeaderComponent implements OnInit {
   calculateTotal(list) {
     this.totalSpent = 0;
 
-    list.map(item => {
+    list.spentList.map(item => {
       item.totalSpent = item.spentList.reduce((counter: number, currentValue: any) => counter + currentValue.itemValue, 0);
       this.totalSpent += item.totalSpent;
     });

@@ -73,29 +73,31 @@ mat-icon {
 
 }
 
-::ng-deep .mat-form-field {
+.mat-dialog-content {
+  ::ng-deep .mat-form-field {
 
-  .mat-form-field-wrapper {
-    //space around the input
-    padding-bottom: 0;
-  }
-
-  ::ng-deep .mat-form-field-label {
-    // Text inside input
-    color: $dark;
-  }
-
-  &.mat-form-field-invalid {
-    ::ng-deep .mat-form-field-label {
-      color: $red;
+    .mat-form-field-wrapper {
+      //space around the input
+      padding-bottom: 0;
     }
-  }
 
-  &.mat-focused {
-
-    // when input is focused the label above 
-    .mat-form-field-label {
+    ::ng-deep .mat-form-field-label {
+      // Text inside input
       color: $dark;
+    }
+
+    &.mat-form-field-invalid {
+      ::ng-deep .mat-form-field-label {
+        color: $red;
+      }
+    }
+
+    &.mat-focused {
+
+      // when input is focused the label above 
+      .mat-form-field-label {
+        color: $dark;
+      }
     }
   }
 }

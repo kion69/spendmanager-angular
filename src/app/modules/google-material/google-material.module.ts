@@ -14,7 +14,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
-
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   exports: [
@@ -33,7 +33,8 @@ import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
     MatListModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatBottomSheetModule
+    MatBottomSheetModule,
+    MatSelectModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },

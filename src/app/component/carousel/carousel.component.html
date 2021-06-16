@@ -1,0 +1,11 @@
+<div class="select-month">
+    <mat-form-field appearance="fill">
+        <mat-label>Mês</mat-label>
+        <mat-select panelClass="select-panel" disableRipple  [(value)]="monthSelected">
+            <mat-option *ngFor="let month of months" [value]="month" aria-selected="true">
+                {{month}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+</div>

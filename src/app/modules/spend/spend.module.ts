@@ -8,13 +8,16 @@ import { AddSpentComponent } from '../../component/modal/add-spent/add-spent.com
 import { LongPressDirective } from '../../directive/long-press';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { CarouselComponent } from '../../component/carousel/carousel.component';
+
 
 
 @NgModule({
   declarations: [
     SpendComponent,
     AddSpentComponent,
-    LongPressDirective
+    LongPressDirective,
+    CarouselComponent,
   ],
   imports: [
     CommonModule,
@@ -23,7 +26,7 @@ import { HttpClientModule } from '@angular/common/http';
     SharedModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
 })
 export class SpendModule { }

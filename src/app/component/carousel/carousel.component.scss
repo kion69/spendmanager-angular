@@ -1,0 +1,40 @@
+@import '../../../assets/colors.scss';
+
+.select-month {
+  margin-top: 25px;
+
+  .mat-form-field {
+
+    .mat-form-field-flex {
+      background-color: white;
+    }
+
+    .mat-select-arrow,
+    .mat-form-field-label,
+    .mat-form-field-flex {
+      color: $dark;
+    }
+
+    .mat-form-field-ripple {
+      background-color: $red;
+    }
+  }
+}
+
+.mat-select-panel {
+
+  .mat-option.mat-selected:not(.mat-option-multiple) {
+    background-color: $red;
+
+    span {
+      color: #fff;
+    }
+  }
+
+}
+
+.select-panel {
+  span {
+    color: $dark;
+  }
+}

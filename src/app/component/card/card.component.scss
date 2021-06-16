@@ -1,10 +1,9 @@
 @import '../../../assets/colors.scss';
 
-
 :host ,app-card {
   display: grid;
   grid-gap: 15px;
-  padding: 25px 0 55px;
+  padding: 0px 0px 55px;
   max-width: 800px;
   margin: auto;
 }
