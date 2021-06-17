@@ -1,6 +1,7 @@
 @import '../../../assets/colors.scss';
 
-:host ,app-card {
+:host,
+app-card {
   display: grid;
   grid-gap: 15px;
   padding: 0px 0px 55px;
@@ -29,4 +30,20 @@ mat-card {
   span:nth-child(2) {
     font-weight: 500;
   }
+}
+
+.load-spinner {
+
+  display: flex;
+  justify-content: center;
+
+  ::ng-deep .mat-progress-spinner circle,
+  .mat-spinner circle {
+    stroke: $dark
+  }
+}
+
+.loader-card {
+  display: flex;
+  justify-content: center;
 }

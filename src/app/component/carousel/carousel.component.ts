@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import dayjs from 'dayjs';
 
 @Component({
@@ -7,16 +7,20 @@ import dayjs from 'dayjs';
   styleUrls: ['./carousel.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class CarouselComponent implements OnInit, AfterViewInit {
+export class CarouselComponent implements OnInit {
 
-  months = ['JANEIRO', 'FEVEIRO', 'MARÇO', 'ABRIL', 'MAIO', 'JUNHO', 'JULHO', 'AGOSTO', 'OUTUBRO', 'NOVEMBRO', 'DEZEMBRO'];
-  monthSelected;
+  months = ['Janeiro', 'Feveiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Outubro', 'Novembro', 'Dezembro'];
+  monthSelected: string;
+
+  @Output() emitChange = new EventEmitter();
+
   constructor() { }
 
-  ngOnInit(): void { 
-    this.monthSelected = dayjs().format('MMMM').toUpperCase();
+  ngOnInit(): void {
+    this.monthSelected = dayjs().format('MMMM');
   }
 
-  ngAfterViewInit(): void { }
-
+  monthChanged({ value }) {
+    this.emitChange.emit(value);
+  }
 }

@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import dayjs from 'dayjs';
+import { Component, Input, OnInit } from '@angular/core';
+import dayjs, { Dayjs } from 'dayjs';
 import { default as spentDataJSON } from '../../mock/spent.mock.json';
 import { AddSpentComponent } from '../../component/modal/add-spent/add-spent.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -9,6 +9,8 @@ import { Constants } from '../../constants/event-emitter';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { AngularFireDatabase } from '@angular/fire/database';
+import { FirebaseService } from '../../services/firebase.service';
+import { DataSnapshot } from '@angular/fire/database/interfaces';
 
 @Component({
   selector: 'app-spend',
@@ -18,8 +20,9 @@ import { AngularFireDatabase } from '@angular/fire/database';
 })
 export class SpendComponent implements OnInit {
 
-  currentMonth: string;
+  currentDate: Dayjs;
   spentInformation: any[];
+  firebaseList: {};
   spentData: any; //Needs to create an Interface  
   contentList: any;
   item: Observable<any[]>;
@@ -27,17 +30,49 @@ export class SpendComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     private eventEmitter: EventEmitterService,
-    database: AngularFireDatabase
+    private _firebaseService: FirebaseService
   ) {
-    this.currentMonth = dayjs().format('MMMM');
-    database.list(database.database.ref()).valueChanges(['child_added']).subscribe(x => console.log('yyy', x));
+    this.currentDate = dayjs();
+    this.spentInformation = [];
+    this.firebaseList = {};
   }
 
   ngOnInit(): void {
-    const currentYear = dayjs().year();
-    this.spentInformation = spentDataJSON[currentYear][this.currentMonth];
-    // Após retornar os dados do banco de dados, realizar a chamada para atualizar o cabeçalho
-    this.eventEmitter.setValue(Constants.HEADER_SPENT_TOTAL, this.spentInformation);
+
+    this._firebaseService
+      .checkConnection()
+      .on('value', snapshot => {
+        if (snapshot.val() === true) {
+          console.log("connected");
+
+        }
+      });
+
+    this._firebaseService
+      .getItemsFromYear(String(this.currentDate.year()))
+      .once('value', snapshot => {
+        const month = this.currentDate.format('MMMM');
+        this.loadContent(snapshot.val(), month)
+      });
+  }
+
+  loadContent(snapshot: DataSnapshot, month: string) {
+    if (snapshot[month]) {
+      this.firebaseList = snapshot;
+      this.spentInformation = this.firebaseList[month];
+      this.eventEmitter.sendValue(Constants.HEADER_SPENT_TOTAL, this.spentInformation);
+    }
+  }
+
+  getSpents(month?: string) {
+    if (this.firebaseList[month]) {
+      this.spentInformation = this.firebaseList[month];
+      this.eventEmitter.sendValue(Constants.HEADER_SPENT_TOTAL, this.spentInformation);
+    }
+    else {
+      this.spentInformation = [];
+    }
+
   }
 
   addSpent() {
@@ -50,7 +85,7 @@ export class SpendComponent implements OnInit {
         result => {
           if (result) {
             this.spentInformation.push.apply(this.spentInformation, result);
-            this.eventEmitter.setValue(Constants.HEADER_SPENT_TOTAL, this.spentInformation);
+            this.eventEmitter.sendValue(Constants.HEADER_SPENT_TOTAL, this.spentInformation);
           }
         });
   }
@@ -69,7 +104,7 @@ export class SpendComponent implements OnInit {
         result => {
           if (result) {
             this.contentList.spentList = result[0].spentList;
-            this.eventEmitter.setValue(Constants.HEADER_SPENT_TOTAL, this.contentList);
+            this.eventEmitter.sendValue(Constants.HEADER_SPENT_TOTAL, this.contentList);
           }
         });
   }

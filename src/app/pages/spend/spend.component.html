@@ -1,12 +1,12 @@
 <div class="spend-body">
 
     <div style="display: flex; justify-content: center">
-        <app-carousel></app-carousel>
+        <app-carousel (emitChange)="getSpents($event)"></app-carousel>
     </div>
 
     <app-card [contentList]="spentInformation">
     </app-card>
-
+    
     <!-- <mat-card matRipple *ngFor="let spent of spentInformation" (click)="inspectCurrentSpent(spent)">
         <div>
             <mat-card-header>

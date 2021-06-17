@@ -1,15 +1,25 @@
 <div class="spend-header">
 
     <div class="first-label">
-        <span>Gasto Atual</span>
+        <span>Gastos Atual</span>
+
+        <div class="current-month">
+            <span>{{currentMonth}}/{{currentYear}}</span>
+        </div>
     </div>
 
-    <div class="total-spent">
-        <span>{{totalSpent | currency:'BRL' }}</span>
-    </div>
+    <div class="total-spent" [ngSwitch]="showLoader">
+        
+        <div class="loader-container" *ngSwitchCase="true">
+            <span class="currency-symbol">R$</span>
+            <div>
+                <mat-spinner [color]="'#fff'" [diameter]="25" [strokeWidth]="3"></mat-spinner>
+            </div>
+        </div>
 
-    <div class="current-month">
-        <span>{{currentMonth}}/{{currentYear}}</span>
+        <div *ngSwitchCase="false">
+            <span>{{totalSpent | currency:'BRL' }}</span>
+        </div>
     </div>
 
 </div>

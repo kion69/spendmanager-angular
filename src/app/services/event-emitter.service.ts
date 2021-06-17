@@ -16,7 +16,7 @@ export class EventEmitterService {
     return this.evento[eventName].asObservable();
   }
 
-  setValue(arg: string, value: any) {
+  sendValue(arg: string, value?: any) {
     const className = arg;
     this.evento[className].next(value);
   }

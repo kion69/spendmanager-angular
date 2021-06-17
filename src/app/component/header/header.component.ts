@@ -15,9 +15,11 @@ export class HeaderComponent implements OnInit {
   currentYear: number;
   totalSpent: number;
   spentData: any;
+  showLoader: boolean;
 
   constructor(private eventEmitter: EventEmitterService) {
     this.spentData = spentDataJSON;
+    this.showLoader = true;
   }
 
   ngOnInit(): void {
@@ -26,17 +28,18 @@ export class HeaderComponent implements OnInit {
     this.currentYear = dayjs().year();
     this.totalSpent = 0;
 
-    this.calculateTotal(this.spentData[this.currentYear][this.currentMonth]);
+    // this.calculateTotal(this.spentData[this.currentYear][this.currentMonth]);
 
     this.eventEmitter.register(Constants.HEADER_SPENT_TOTAL).subscribe(result => {
       this.calculateTotal(result);
+      this.showLoader = false;
     });
   }
 
   calculateTotal(list) {
     this.totalSpent = 0;
 
-    list.spentList.map(item => {
+    list.spentList?.map(item => {
       item.totalSpent = item.spentList.reduce((counter: number, currentValue: any) => counter + currentValue.itemValue, 0);
       this.totalSpent += item.totalSpent;
     });

@@ -19,6 +19,6 @@ export class NavigationMenuComponent implements OnInit {
   ngOnInit(): void { }
 
   openSideMenu(): void {
-    this.eventEmitter.setValue(Constants.OPEN_SIDE_MENU, true);
+    this.eventEmitter.sendValue(Constants.OPEN_SIDE_MENU, true);
   }
 }
