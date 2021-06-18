@@ -11,6 +11,8 @@ import { Observable } from 'rxjs';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { FirebaseService } from '../../services/firebase.service';
 import { DataSnapshot } from '@angular/fire/database/interfaces';
+import { DateFormatService } from '../../services/date-parse.service';
+import { FirebaseDate } from '../../interface/firebase-date';
 
 @Component({
   selector: 'app-spend',
@@ -21,7 +23,8 @@ import { DataSnapshot } from '@angular/fire/database/interfaces';
 export class SpendComponent implements OnInit {
 
   currentDate: Dayjs;
-  spentInformation: any[];
+  dateObject: FirebaseDate;
+  spentInformation: any;
   firebaseList: {};
   spentData: any; //Needs to create an Interface  
   contentList: any;
@@ -30,7 +33,8 @@ export class SpendComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     private eventEmitter: EventEmitterService,
-    private _firebaseService: FirebaseService
+    private _firebaseService: FirebaseService,
+    private dateService: DateFormatService
   ) {
     this.currentDate = dayjs();
     this.spentInformation = [];
@@ -48,16 +52,25 @@ export class SpendComponent implements OnInit {
         }
       });
 
+    this.dateObject = this.dateService.convertDayjsToObject(this.currentDate);
+
     this._firebaseService
-      .getItemsFromYear(String(this.currentDate.year()))
+      .getItemsFromYear(this.dateObject.year)
       .once('value', snapshot => {
         const month = this.currentDate.format('MMMM');
         this.loadContent(snapshot.val(), month)
       });
+
+    this._firebaseService.getItemsFromYear(this.dateObject.year)
+      .once('child_added', snapshot => {
+        console.log('novositems>', snapshot.val());
+        const data = snapshot.val().spentList;
+        this.firebaseList[this.dateObject.month].spentList.push(...data);
+      });
   }
 
   loadContent(snapshot: DataSnapshot, month: string) {
-    if (snapshot[month]) {
+    if (snapshot && snapshot[month]) {
       this.firebaseList = snapshot;
       this.spentInformation = this.firebaseList[month];
       this.eventEmitter.sendValue(Constants.HEADER_SPENT_TOTAL, this.spentInformation);
@@ -72,7 +85,6 @@ export class SpendComponent implements OnInit {
     else {
       this.spentInformation = [];
     }
-
   }
 
   addSpent() {
@@ -82,9 +94,30 @@ export class SpendComponent implements OnInit {
       maxWidth: '90vw'
     }).afterClosed()
       .subscribe(
-        result => {
+        (result: any[]) => {
           if (result) {
-            this.spentInformation.push.apply(this.spentInformation, result);
+            result.map((spent: any) => {
+              const existingDate = this.spentInformation.spentList?.find(existingSpent => existingSpent.spentDate === spent.spentDate);
+              if (existingDate) {
+                existingDate.spentList.push(...spent.spentList)
+              }
+              else {
+                delete spent.spentForm;
+
+                const dateParsed = this.dateService.parse(spent.spentDate);
+                const dateObject = this.dateService.convertDayjsToObject(dateParsed);
+
+                if (!(dateObject.month in this.spentInformation)) {
+                  this.spentInformation[dateObject.month] = {
+                    spentList: Array.from(spent)
+                  }
+                };
+
+                this._firebaseService.insertItem(this.dateObject, spent.spentDate, result);
+
+              }
+            });
+
             this.eventEmitter.sendValue(Constants.HEADER_SPENT_TOTAL, this.spentInformation);
           }
         });
@@ -108,4 +141,7 @@ export class SpendComponent implements OnInit {
           }
         });
   }
+
+
+
 }

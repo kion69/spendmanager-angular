@@ -37,8 +37,6 @@ export class CardComponent implements OnInit {
       .subscribe(
         result => {
           if (result) {
-            const spent = this.contentList.find(x => x.id === result[0].id);
-            spent.spentList = result[0].spentList;
             this.eventEmitter.sendValue(Constants.HEADER_SPENT_TOTAL, this.contentList);
           }
         });

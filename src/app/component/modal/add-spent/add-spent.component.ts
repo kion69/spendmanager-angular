@@ -7,9 +7,10 @@ import { MatAccordion, MatExpansionPanel } from '@angular/material/expansion';
 import dayjs from 'dayjs';
 import { verticalSlideAnimation } from '../../../../assets/animations/slide';
 import { BottomSheetActions } from '../../../enum/bottom-sheet';
-import { DateParseService } from '../../../services/date-parse.service';
+import { DateFormatService } from '../../../services/date-parse.service';
 import { BottomSheetComponent } from '../../bottom-sheet/bottom-sheet.component';
-
+import { MatDatepicker } from '@angular/material/datepicker';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-add-spent',
@@ -31,11 +32,11 @@ export class AddSpentComponent implements OnInit {
   editingAction: boolean;
   editingItem: any;
 
-  @ViewChild('picker') picker;
+  @ViewChild('picker') picker: MatDatepicker<any>;
   @ViewChild(MatAccordion) accordion: MatAccordion;
 
   constructor(
-    private dateParser: DateParseService,
+    private dateParser: DateFormatService,
     private bottomSheet: MatBottomSheet,
     private dialogRef: MatDialogRef<AddSpentComponent>,
     @Inject(MAT_DIALOG_DATA) public dialogParameters) {
@@ -70,8 +71,9 @@ export class AddSpentComponent implements OnInit {
   calculateTotal() {
     this.spentInformation
       .forEach(spent => {
-        spent.spentTotal = spent.spentList.reduce((counter: any, currentValue: any) => counter + currentValue.itemValue, 0);
+        spent.totalSpent = spent.spentList.reduce((counter: any, currentValue: any) => counter + currentValue.itemValue, 0);
       });
+
   }
 
   validateInput(currentList) {
@@ -82,7 +84,7 @@ export class AddSpentComponent implements OnInit {
 
     if (itemName.valid && itemValue.valid) {
       currentList.spentList.push({
-        id: Math.ceil(Math.random() * 100),
+        id: uuidv4(),
         itemName: itemName.value,
         itemValue: Number(itemValue.value),
         itemDescription: itemDescription.value
@@ -98,24 +100,30 @@ export class AddSpentComponent implements OnInit {
       return;
     }
 
-    const formattedDate = this.dateParser.parse(dateInput.targetElement.value);
+    const parsedDate = this.dateParser.parse(dateInput.targetElement.value);
+    const formattedDate = this.dateParser.transformDate(parsedDate);
 
-    if (!dayjs(formattedDate).isValid()) {
+    if (!dayjs(parsedDate).isValid()) {
       return;
     }
 
-    this.spentInformation.push({
-      spentDate: dayjs(formattedDate).format('DD/MM/YYYY'),
-      spentTotal: 0,
-      spentForm: new FormBuilder().group({
-        itemName: ['', Validators.required],
-        itemValue: ['', Validators.required],
-        itemDescription: ['']
-      }),
-      spentList: []
-    });
+    const existingDate = this.spentInformation.some(spent => spent.spentDate === formattedDate);
+
+    if (!existingDate)
+      this.spentInformation.push({
+        spentDate: dayjs(parsedDate).format('DD/MM/YYYY'),
+        totalSpent: 0,
+        spentForm: new FormBuilder().group({
+          itemName: ['', Validators.required],
+          itemValue: ['', Validators.required],
+          itemDescription: ['']
+        }),
+        spentList: []
+      });
 
     this.dateForm.reset();
+    this.picker.close();
+    this.picker.select(null);
   }
 
   deleteItem(spentList: [], index) {
