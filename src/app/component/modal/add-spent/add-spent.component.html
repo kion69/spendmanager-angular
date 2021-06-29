@@ -1,11 +1,3 @@
-<!-- <div class="spent-modal-backdrop" *ngIf="showModal" (click)="showModal = false;"></div>
-
-<div class="spent-modal" [@verticalSlideAnimation] *ngIf="showModal"
-    (@verticalSlideAnimation.done)="animationDone($event)">
-    sou modal
-    <p (click)="fechar()">fechar</p>
-</div> -->
-
 <div class="modal-header" mat-dialog-title>
     <span>Adicionar novo gasto</span>
     <span class="modal-close-button" matRipple (click)="closeDialog()">
@@ -13,23 +5,49 @@
     </span>
 </div>
 
-
-<div class="modal-body" [@.disabled]="true">
+<div class="modal-body" [@.disabled]="disableAnimation">
 
     <mat-dialog-content>
 
         <mat-accordion>
-            <mat-expansion-panel *ngFor="let spent of spentInformation">
-                <mat-expansion-panel-header>
+
+            <mat-expansion-panel [disabled]="startei" *ngFor="let spent of spentInformation">
+                <!-- <mat-expansion-panel-header [@showPanel]="valor" class="panel-slide-option">
+                    <div>
+                        <span>peganomeu</span>
+                    </div>
+                </mat-expansion-panel-header> -->
+                <!-- <mat-expansion-panel-header class="panel-title" #painel [ngStyle]="superpainel" cdkDragLockAxis="x"
+                    cdkDrag (cdkDragMoved)="teste($event)" (cdkDragStarted)="comecei($event)"
+                    (cdkDragEnded)="terminei($event)" (cdkDragReleased)="release($event)" [cdkDragHandleDisabled]="true"
+                    [cdkDragBoundary]="soubacana" matRipple>
                     <mat-panel-title>
                         {{spent.spentDate}}
                     </mat-panel-title>
                     <mat-panel-description>
                         Total {{spent.totalSpent | currency: 'BRL'}}
                     </mat-panel-description>
+                </mat-expansion-panel-header> -->
+
+                <mat-expansion-panel-header class="expansion-panel-container" [@selectPanel]="trig" matRipple>
+                    <div class="panel-container">
+                        <span class="panel-title">
+                            {{spent.spentDate}}
+                        </span>
+                        <span class="panel-description">
+                            Total {{spent.totalSpent | currency: 'BRL'}}
+                        </span>
+                        <div class="panel-selected">
+                            <span  [@selectPanel] *ngIf="trig">
+                                <mat-icon class="material-icons-outlined">check_circle</mat-icon>
+                            </span>
+                        </div>
+
+                    </div>
+
                 </mat-expansion-panel-header>
 
-                <div #form>
+                <div>
                     <div matRipple class="spent-list" *ngFor="let spentItem of spent.spentList; let i = index" longPress
                         (onLongPress)="openOptions(spentItem, spent.spentList, spent.spentForm, i)">
                         <div class="spent-list-item">
@@ -40,7 +58,6 @@
                         <div class="spent-list-item-value">
                             <span>{{spentItem.itemValue | currency : 'BRL'}}</span>
                         </div>
-
                     </div>
 
                     <form [formGroup]="spent.spentForm">
@@ -60,6 +77,9 @@
                                 <mat-label>Descrição</mat-label>
                                 <input formControlName="itemDescription" matInput number placeholder="Breve descrição">
                             </mat-form-field>
+                            <div>
+                                <h5>* campos obrigatórios</h5>
+                            </div>
                         </div>
 
                         <div class="accordion-action-button">
@@ -90,10 +110,6 @@
                             </div>
                         </div>
                     </form>
-
-                    <div>
-                        <h5>* campos obrigatórios</h5>
-                    </div>
                 </div>
 
             </mat-expansion-panel>
@@ -104,7 +120,8 @@
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker touchUi #picker></mat-datepicker>
                 </mat-form-field>
-                <button mat-button class="modal-action-button new-date" (click)="picker.open()" *ngIf="!dialogParameters">
+                <button mat-button class="modal-action-button new-date" (click)="picker.open()"
+                    *ngIf="!dialogParameters">
                     <div class="button-container">
                         <span class="material-icons material-icons-round">
                             <mat-icon>add</mat-icon>

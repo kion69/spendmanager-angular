@@ -16,8 +16,8 @@ export class FirebaseService {
     this.databaseRef = this.database.database;
   }
 
-  getItemsFromYear(year: string) {
-    return this.databaseRef.ref(year);
+  getItemsFromYear(year: string, month?: string) {
+    return this.databaseRef.ref().child(year).child(month);
   }
 
   checkConnection() {
@@ -27,7 +27,7 @@ export class FirebaseService {
   insertItem(dateObject: FirebaseDate, dateNode: string, data) {
     this.databaseRef.ref(`${dateObject.year}/${dateObject.month}`)
       .child('spentList')
-      .child(this.dateFormatService.replaceSlash(dateNode)).push(data);
+      .child(this.dateFormatService.replaceSlash(dateNode)).set(data);
   }
 
 }

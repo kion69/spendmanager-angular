@@ -28,7 +28,7 @@ export class CardComponent implements OnInit {
     this.dialog.open(AddSpentComponent, {
       data: {
         ...spent,
-        spentList: Array.from(spent.spentList)
+        spentList: spent.spentList ? Array.from(spent.spentList) : []
       },
       minHeight: '500px',
       width: '500px',

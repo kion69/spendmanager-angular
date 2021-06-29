@@ -1,26 +1,27 @@
-import { Inject } from '@angular/core';
+import { EventEmitter, Inject, ViewEncapsulation } from '@angular/core';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatAccordion, MatExpansionPanel } from '@angular/material/expansion';
 import dayjs from 'dayjs';
-import { verticalSlideAnimation } from '../../../../assets/animations/slide';
+import { fadeAnimation } from '../../../../assets/animations/slide';
 import { BottomSheetActions } from '../../../enum/bottom-sheet';
 import { DateFormatService } from '../../../services/date-parse.service';
 import { BottomSheetComponent } from '../../bottom-sheet/bottom-sheet.component';
 import { MatDatepicker } from '@angular/material/datepicker';
 import { v4 as uuidv4 } from 'uuid';
+import { Observable } from 'rxjs';
+import { Output } from '@angular/core';
+import { CdkDragEnd, CdkDragMove, CdkDragRelease, CdkDragStart } from '@angular/cdk/drag-drop';
+import { selectedPanel } from '../../../../assets/animations/select-panel.animation';
 
 @Component({
   selector: 'app-add-spent',
   templateUrl: './add-spent.component.html',
   styleUrls: ['./add-spent.component.scss'],
-  animations: [verticalSlideAnimation],
-  host: {
-    '(@verticalSlideAnimation.done)': 'animationDone($event)'
-  },
-  viewProviders: [MatExpansionPanel]
+  animations: [fadeAnimation, selectedPanel],
+  encapsulation: ViewEncapsulation.None
 })
 export class AddSpentComponent implements OnInit {
 
@@ -34,6 +35,15 @@ export class AddSpentComponent implements OnInit {
 
   @ViewChild('picker') picker: MatDatepicker<any>;
   @ViewChild(MatAccordion) accordion: MatAccordion;
+  @ViewChild('painel') painel: MatExpansionPanel;
+
+  @Output('cdkDragMoved') moved: Observable<CdkDragMove<any>>
+  @Output('cdkDragStarted') started: EventEmitter<CdkDragStart>
+  @Output('cdkDragReleased') released: EventEmitter<CdkDragRelease>
+  @Output('cdkDragEnded') ended: EventEmitter<CdkDragEnd>
+
+  dragPosition = { x: 0, y: 0 };
+  bacanudo = false;
 
   constructor(
     private dateParser: DateFormatService,
@@ -66,6 +76,9 @@ export class AddSpentComponent implements OnInit {
 
   ngOnInit(): void {
     this.calculateTotal();
+    setTimeout(() => {
+      this.disableAnimation = false
+    });
   }
 
   calculateTotal() {
@@ -182,5 +195,39 @@ export class AddSpentComponent implements OnInit {
 
   closeDialog() {
     this.dialogRef.close(this.spentInformation);
+  }
+
+  teste(ev) {
+    // console.log(ev);
+  }
+
+  abreocu() {
+    this.picker.open();
+  }
+
+  startei;
+  superpainel;
+  trig = false;
+
+  comecei(pega) {
+    this.startei = true;
+  }
+
+  terminei(ev) {
+    console.log('terminei', ev);
+    this.superpainel = {
+      'transition': 'transform 300ms cubic-bezier(0, 0, 0.2, 1)',
+    };
+
+    // ev.source.reset();
+    setTimeout(() => {
+      this.superpainel = '';
+      this.startei = false;
+    }, 300);
+  }
+
+  release(ev) {
+    console.log('relese', ev);
+    // this.opacity = 0;
   }
 }

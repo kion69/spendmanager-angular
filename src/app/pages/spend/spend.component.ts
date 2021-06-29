@@ -13,12 +13,15 @@ import { FirebaseService } from '../../services/firebase.service';
 import { DataSnapshot } from '@angular/fire/database/interfaces';
 import { DateFormatService } from '../../services/date-parse.service';
 import { FirebaseDate } from '../../interface/firebase-date';
+import { selectedPanel } from '../../../assets/animations/select-panel.animation';
+import { fadeAnimation } from '../../../assets/animations/slide';
 
 @Component({
   selector: 'app-spend',
   templateUrl: './spend.component.html',
   styleUrls: ['./spend.component.scss'],
-  encapsulation: ViewEncapsulation.Emulated,
+  encapsulation: ViewEncapsulation.None,
+  animations: [selectedPanel, fadeAnimation]
 })
 export class SpendComponent implements OnInit {
 
@@ -48,18 +51,12 @@ export class SpendComponent implements OnInit {
       .on('value', snapshot => {
         if (snapshot.val() === true) {
           console.log("connected");
-
         }
       });
 
     this.dateObject = this.dateService.convertDayjsToObject(this.currentDate);
 
-    this._firebaseService
-      .getItemsFromYear(this.dateObject.year)
-      .once('value', snapshot => {
-        const month = this.currentDate.format('MMMM');
-        this.loadContent(snapshot.val(), month)
-      });
+    this.getSpents(this.dateObject.month);
 
     this._firebaseService.getItemsFromYear(this.dateObject.year)
       .once('child_added', snapshot => {
@@ -70,21 +67,31 @@ export class SpendComponent implements OnInit {
   }
 
   loadContent(snapshot: DataSnapshot, month: string) {
-    if (snapshot && snapshot[month]) {
-      this.firebaseList = snapshot;
-      this.spentInformation = this.firebaseList[month];
+    if (snapshot) {
+      const props = snapshot;
+      const monthItems = Object.keys(props).map((key) => props[key])
+      this.spentInformation = monthItems;
       this.eventEmitter.sendValue(Constants.HEADER_SPENT_TOTAL, this.spentInformation);
     }
   }
 
+  trig = false;
+
   getSpents(month?: string) {
-    if (this.firebaseList[month]) {
-      this.spentInformation = this.firebaseList[month];
-      this.eventEmitter.sendValue(Constants.HEADER_SPENT_TOTAL, this.spentInformation);
-    }
-    else {
-      this.spentInformation = [];
-    }
+    this._firebaseService
+      .getItemsFromYear(this.dateObject.year, month)
+      .once('value')
+      .then(snapshot => {
+        if (snapshot.exists()) {
+          const month = this.currentDate.format('MMMM');
+          this.loadContent(snapshot.val().spentList, month)
+        } else {
+          this.spentInformation = [];
+        }
+      },
+        (seila) => {
+          console.log('sei la');
+        });
   }
 
   addSpent() {
@@ -97,30 +104,24 @@ export class SpendComponent implements OnInit {
         (result: any[]) => {
           if (result) {
             result.map((spent: any) => {
-              const existingDate = this.spentInformation.spentList?.find(existingSpent => existingSpent.spentDate === spent.spentDate);
+              const existingDate = this.spentInformation?.find(existingSpent => existingSpent.spentDate === spent.spentDate);
               if (existingDate) {
                 existingDate.spentList.push(...spent.spentList)
               }
               else {
                 delete spent.spentForm;
-
-                const dateParsed = this.dateService.parse(spent.spentDate);
-                const dateObject = this.dateService.convertDayjsToObject(dateParsed);
-
-                if (!(dateObject.month in this.spentInformation)) {
-                  this.spentInformation[dateObject.month] = {
-                    spentList: Array.from(spent)
-                  }
-                };
-
-                this._firebaseService.insertItem(this.dateObject, spent.spentDate, result);
-
+                this.spentInformation.push(spent)
+                this._firebaseService.insertItem(this.dateObject, spent.spentDate, spent);
               }
             });
 
             this.eventEmitter.sendValue(Constants.HEADER_SPENT_TOTAL, this.spentInformation);
           }
         });
+  }
+
+  chupacu() {
+    this.trig = !this.trig;
   }
 
   inspectCurrentSpent(spent) {
@@ -141,7 +142,4 @@ export class SpendComponent implements OnInit {
           }
         });
   }
-
-
-
 }

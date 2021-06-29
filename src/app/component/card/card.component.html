@@ -1,4 +1,4 @@
-<mat-card matRipple *ngFor="let spent of contentList.spentList" (click)="inspectCurrentSpent(spent)">
+<mat-card matRipple *ngFor="let spent of contentList" (click)="inspectCurrentSpent(spent)">
     <div>
         <mat-card-header>
             <mat-card-title>{{spent.spentDate}}</mat-card-title>
