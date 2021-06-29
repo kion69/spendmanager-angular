@@ -7,29 +7,11 @@
 
 <div class="modal-body" [@.disabled]="disableAnimation">
 
-    <mat-dialog-content>
-
+    <mat-dialog-content *ngIf="!selectMode">
         <mat-accordion>
-
-            <mat-expansion-panel [disabled]="startei" *ngFor="let spent of spentInformation">
-                <!-- <mat-expansion-panel-header [@showPanel]="valor" class="panel-slide-option">
-                    <div>
-                        <span>peganomeu</span>
-                    </div>
-                </mat-expansion-panel-header> -->
-                <!-- <mat-expansion-panel-header class="panel-title" #painel [ngStyle]="superpainel" cdkDragLockAxis="x"
-                    cdkDrag (cdkDragMoved)="teste($event)" (cdkDragStarted)="comecei($event)"
-                    (cdkDragEnded)="terminei($event)" (cdkDragReleased)="release($event)" [cdkDragHandleDisabled]="true"
-                    [cdkDragBoundary]="soubacana" matRipple>
-                    <mat-panel-title>
-                        {{spent.spentDate}}
-                    </mat-panel-title>
-                    <mat-panel-description>
-                        Total {{spent.totalSpent | currency: 'BRL'}}
-                    </mat-panel-description>
-                </mat-expansion-panel-header> -->
-
-                <mat-expansion-panel-header class="expansion-panel-container" [@selectPanel]="trig" matRipple>
+            <mat-expansion-panel *ngFor="let spent of spentInformation">
+                <mat-expansion-panel-header class="expansion-panel-container" matRipple
+                    (onLongPress)="selectionMode($event, spent)" longPress [pressTime]="800">
                     <div class="panel-container">
                         <span class="panel-title">
                             {{spent.spentDate}}
@@ -37,14 +19,7 @@
                         <span class="panel-description">
                             Total {{spent.totalSpent | currency: 'BRL'}}
                         </span>
-                        <div class="panel-selected">
-                            <span  [@selectPanel] *ngIf="trig">
-                                <mat-icon class="material-icons-outlined">check_circle</mat-icon>
-                            </span>
-                        </div>
-
                     </div>
-
                 </mat-expansion-panel-header>
 
                 <div>
@@ -111,8 +86,8 @@
                         </div>
                     </form>
                 </div>
-
             </mat-expansion-panel>
+
             <div class="new-date-container">
                 <mat-form-field class="date-picker-container" appearance="outline">
                     <mat-label>Nova Data</mat-label>
@@ -133,4 +108,24 @@
 
         </mat-accordion>
     </mat-dialog-content>
+
+    <div *ngIf="selectMode">
+        <div class="select-items-container" *ngFor="let spent of spentInformation" [@selectPanel]="spent.selected"
+            (click)="spent.selected = !spent.selected" matRipple>
+            <div class="panel-container">
+                <span class="panel-title">
+                    {{spent.spentDate}}
+                </span>
+                <span class="panel-description">
+                    Total {{spent.totalSpent | currency: 'BRL'}}
+                </span>
+            </div>
+            <div class="panel-selected">
+                <span *ngIf="spent.selected">
+                    <mat-icon class="material-icons-outlined">check_circle</mat-icon>
+                </span>
+            </div>
+        </div>
+    </div>
+
 </div>

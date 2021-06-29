@@ -86,7 +86,6 @@ export class AddSpentComponent implements OnInit {
       .forEach(spent => {
         spent.totalSpent = spent.spentList.reduce((counter: any, currentValue: any) => counter + currentValue.itemValue, 0);
       });
-
   }
 
   validateInput(currentList) {
@@ -207,7 +206,7 @@ export class AddSpentComponent implements OnInit {
 
   startei;
   superpainel;
-  trig = false;
+  selectMode = false;
 
   comecei(pega) {
     this.startei = true;
@@ -229,5 +228,10 @@ export class AddSpentComponent implements OnInit {
   release(ev) {
     console.log('relese', ev);
     // this.opacity = 0;
+  }
+
+  selectionMode(par, item) {
+    this.selectMode = true;
+    item.selected = true;
   }
 }

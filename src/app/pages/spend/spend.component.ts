@@ -58,24 +58,22 @@ export class SpendComponent implements OnInit {
 
     this.getSpents(this.dateObject.month);
 
-    this._firebaseService.getItemsFromYear(this.dateObject.year)
-      .once('child_added', snapshot => {
-        console.log('novositems>', snapshot.val());
-        const data = snapshot.val().spentList;
-        this.firebaseList[this.dateObject.month].spentList.push(...data);
-      });
+    // this._firebaseService.getItemsFromYear(this.dateObject.year)
+    //   .once('child_added', snapshot => {
+    //     console.log('novositems>', snapshot.val());
+    //     const data = snapshot.val().spentList;
+    //     this.firebaseList[this.dateObject.month].spentList.push(...data);
+    //   });
   }
 
   loadContent(snapshot: DataSnapshot, month: string) {
     if (snapshot) {
       const props = snapshot;
-      const monthItems = Object.keys(props).map((key) => props[key])
+      const monthItems = Object.keys(props).map((key) => props[key]);
       this.spentInformation = monthItems;
       this.eventEmitter.sendValue(Constants.HEADER_SPENT_TOTAL, this.spentInformation);
     }
   }
-
-  trig = false;
 
   getSpents(month?: string) {
     this._firebaseService
@@ -106,11 +104,11 @@ export class SpendComponent implements OnInit {
             result.map((spent: any) => {
               const existingDate = this.spentInformation?.find(existingSpent => existingSpent.spentDate === spent.spentDate);
               if (existingDate) {
-                existingDate.spentList.push(...spent.spentList)
+                existingDate.spentList.push(...spent.spentList);
               }
               else {
                 delete spent.spentForm;
-                this.spentInformation.push(spent)
+                this.spentInformation.push(spent);
                 this._firebaseService.insertItem(this.dateObject, spent.spentDate, spent);
               }
             });
@@ -118,10 +116,6 @@ export class SpendComponent implements OnInit {
             this.eventEmitter.sendValue(Constants.HEADER_SPENT_TOTAL, this.spentInformation);
           }
         });
-  }
-
-  chupacu() {
-    this.trig = !this.trig;
   }
 
   inspectCurrentSpent(spent) {

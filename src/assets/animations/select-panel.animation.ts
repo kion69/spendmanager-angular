@@ -1,6 +1,6 @@
 import { trigger, state, style, transition, animate } from "@angular/animations";
 
-const cyan = '#43dde6';
+const cyan = '#41dee64d';
 
 export const selectedPanel =
     trigger('selectPanel', [
