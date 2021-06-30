@@ -5,7 +5,6 @@ import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatAccordion, MatExpansionPanel } from '@angular/material/expansion';
 import dayjs from 'dayjs';
-import { fadeAnimation } from '../../../../assets/animations/slide';
 import { BottomSheetActions } from '../../../enum/bottom-sheet';
 import { DateFormatService } from '../../../services/date-parse.service';
 import { BottomSheetComponent } from '../../bottom-sheet/bottom-sheet.component';
@@ -14,14 +13,16 @@ import { v4 as uuidv4 } from 'uuid';
 import { Observable } from 'rxjs';
 import { Output } from '@angular/core';
 import { CdkDragEnd, CdkDragMove, CdkDragRelease, CdkDragStart } from '@angular/cdk/drag-drop';
-import { selectedPanel } from '../../../../assets/animations/select-panel.animation';
+import { EventEmitterService } from '../../../services/event-emitter.service';
+import { EventEmitterConstants } from '../../../constants/event-emitter';
+import { verticalSlideAnimation } from '../../../../../dist/spendmanager-angular/browser/assets/animations/slide';
 
 @Component({
   selector: 'app-add-spent',
   templateUrl: './add-spent.component.html',
   styleUrls: ['./add-spent.component.scss'],
-  animations: [fadeAnimation, selectedPanel],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  animations: [verticalSlideAnimation]
 })
 export class AddSpentComponent implements OnInit {
 
@@ -49,7 +50,8 @@ export class AddSpentComponent implements OnInit {
     private dateParser: DateFormatService,
     private bottomSheet: MatBottomSheet,
     private dialogRef: MatDialogRef<AddSpentComponent>,
-    @Inject(MAT_DIALOG_DATA) public dialogParameters) {
+    @Inject(MAT_DIALOG_DATA) public dialogParameters,
+    private eventEmitter: EventEmitterService) {
 
     this.newDateInput = '';
     this.addNewDate = false;
@@ -76,6 +78,7 @@ export class AddSpentComponent implements OnInit {
 
   ngOnInit(): void {
     this.calculateTotal();
+    this.eventEmitter.register(EventEmitterConstants.DISABLE_SELECT_PANEL_MODE).subscribe(result => this.selectMode = result);
     setTimeout(() => {
       this.disableAnimation = false
     });

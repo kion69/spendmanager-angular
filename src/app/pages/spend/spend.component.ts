@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import dayjs, { Dayjs } from 'dayjs';
-import { default as spentDataJSON } from '../../mock/spent.mock.json';
+import { default as spentDataJSON } from '../../mock/junho.json';
 import { AddSpentComponent } from '../../component/modal/add-spent/add-spent.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ViewEncapsulation } from '@angular/core';
 import { EventEmitterService } from '../../services/event-emitter.service';
-import { Constants } from '../../constants/event-emitter';
+import { EventEmitterConstants } from '../../constants/event-emitter';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { AngularFireDatabase } from '@angular/fire/database';
@@ -66,12 +66,13 @@ export class SpendComponent implements OnInit {
     //   });
   }
 
+  loadContent(snapshot: any, month: string)
   loadContent(snapshot: DataSnapshot, month: string) {
     if (snapshot) {
       const props = snapshot;
       const monthItems = Object.keys(props).map((key) => props[key]);
       this.spentInformation = monthItems;
-      this.eventEmitter.sendValue(Constants.HEADER_SPENT_TOTAL, this.spentInformation);
+      this.eventEmitter.sendValue(EventEmitterConstants.HEADER_SPENT_TOTAL, this.spentInformation);
     }
   }
 
@@ -88,6 +89,7 @@ export class SpendComponent implements OnInit {
         }
       },
         (seila) => {
+          this.loadContent(spentDataJSON, this.dateObject.month);
           console.log('sei la');
         });
   }
@@ -113,7 +115,7 @@ export class SpendComponent implements OnInit {
               }
             });
 
-            this.eventEmitter.sendValue(Constants.HEADER_SPENT_TOTAL, this.spentInformation);
+            this.eventEmitter.sendValue(EventEmitterConstants.HEADER_SPENT_TOTAL, this.spentInformation);
           }
         });
   }
@@ -132,7 +134,7 @@ export class SpendComponent implements OnInit {
         result => {
           if (result) {
             this.contentList.spentList = result[0].spentList;
-            this.eventEmitter.sendValue(Constants.HEADER_SPENT_TOTAL, this.contentList);
+            this.eventEmitter.sendValue(EventEmitterConstants.HEADER_SPENT_TOTAL, this.contentList);
           }
         });
   }

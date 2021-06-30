@@ -1,7 +1,7 @@
 import { Input } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Constants } from '../../constants/event-emitter';
+import { EventEmitterConstants } from '../../constants/event-emitter';
 import { EventEmitterService } from '../../services/event-emitter.service';
 import { AddSpentComponent } from '../modal/add-spent/add-spent.component';
 
@@ -37,7 +37,7 @@ export class CardComponent implements OnInit {
       .subscribe(
         result => {
           if (result) {
-            this.eventEmitter.sendValue(Constants.HEADER_SPENT_TOTAL, this.contentList);
+            this.eventEmitter.sendValue(EventEmitterConstants.HEADER_SPENT_TOTAL, this.contentList);
           }
         });
   }

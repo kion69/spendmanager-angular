@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import dayjs from 'dayjs';
-import { Constants } from '../../constants/event-emitter';
+import { EventEmitterConstants } from '../../constants/event-emitter';
 import { EventEmitterService } from '../../services/event-emitter.service';
 import { default as spentDataJSON } from '../../mock/spent.mock.json';
 
@@ -30,7 +30,7 @@ export class HeaderComponent implements OnInit {
 
     // this.calculateTotal(this.spentData[this.currentYear][this.currentMonth]);
 
-    this.eventEmitter.register(Constants.HEADER_SPENT_TOTAL).subscribe(result => {
+    this.eventEmitter.register(EventEmitterConstants.HEADER_SPENT_TOTAL).subscribe(result => {
       this.calculateTotal(result);
       this.showLoader = false;
     });

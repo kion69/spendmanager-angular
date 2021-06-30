@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { verticalSlideAnimation } from '../../../assets/animations/slide';
-import { Constants } from '../../constants/event-emitter';
+import { EventEmitterConstants } from '../../constants/event-emitter';
 import { EventEmitterService } from '../../services/event-emitter.service';
 
 
@@ -19,6 +19,6 @@ export class NavigationMenuComponent implements OnInit {
   ngOnInit(): void { }
 
   openSideMenu(): void {
-    this.eventEmitter.sendValue(Constants.OPEN_SIDE_MENU, true);
+    this.eventEmitter.sendValue(EventEmitterConstants.OPEN_SIDE_MENU, true);
   }
 }

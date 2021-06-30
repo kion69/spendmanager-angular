@@ -1,7 +1,7 @@
 import { ViewEncapsulation } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { horizontalSlideAnimation } from '../../../assets/animations/slide';
-import { Constants } from '../../constants/event-emitter';
+import { EventEmitterConstants } from '../../constants/event-emitter';
 import { EventEmitterService } from '../../services/event-emitter.service';
 
 @Component({
@@ -21,7 +21,7 @@ export class SideMenuComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.eventEmitter.register(Constants.OPEN_SIDE_MENU).subscribe(responseEvent => {
+    this.eventEmitter.register(EventEmitterConstants.OPEN_SIDE_MENU).subscribe(responseEvent => {
       this.sideMenuOpen = responseEvent;
     });
   }

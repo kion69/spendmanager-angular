@@ -9,6 +9,7 @@ import { LongPressDirective } from '../../directive/long-press';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CarouselComponent } from '../../component/carousel/carousel.component';
+import { SelectSpentPanelComponent } from '../../component/select-spent-panel/select-spent-panel.component';
 
 
 
@@ -18,6 +19,7 @@ import { CarouselComponent } from '../../component/carousel/carousel.component';
     AddSpentComponent,
     LongPressDirective,
     CarouselComponent,
+    SelectSpentPanelComponent,
   ],
   imports: [
     CommonModule,

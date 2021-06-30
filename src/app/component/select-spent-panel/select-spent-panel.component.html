@@ -1,0 +1,17 @@
+<div class="select-items-container" *ngFor="let spent of spentInformation"
+    [@selectPanel]="spent.selected" (click)="spent.selected = !spent.selected" matRipple>
+    <div class="panel-container">
+        <span class="panel-title">
+            {{spent.spentDate}}
+        </span>
+        <span class="panel-description">
+            Total {{spent.totalSpent | currency: 'BRL'}}
+        </span>
+    </div>
+</div>
+
+<div class="panel-selected-backdrop" *ngIf="openPanel" (click)="closePanel()"></div>
+<div class="panel-selected-container" [@verticalSlideAnimation] (@verticalSlideAnimation.done)="onDone($event)" *ngIf="openPanel">
+    <h3>peganomeu</h3>
+    <span (click)="closePanel()">cancelar</span>
+</div>

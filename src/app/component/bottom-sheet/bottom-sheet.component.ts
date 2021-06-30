@@ -27,8 +27,6 @@ export class BottomSheetComponent implements OnInit {
   ngOnInit(): void {
     this.spentItem = this.data;
 
-
-
     this.bottomSheetRef.backdropClick().subscribe(x => {
       this.bottomSheetRef.dismiss({ action: -1 });
     });
