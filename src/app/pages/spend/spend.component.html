@@ -7,22 +7,6 @@
     <app-card [contentList]="spentInformation">
     </app-card>
 
-    <!-- <mat-card matRipple *ngFor="let spent of spentInformation" (click)="inspectCurrentSpent(spent)">
-        <div>
-            <mat-card-header>
-                <mat-card-title>{{spent.spentDate}}</mat-card-title>
-                <mat-card-subtitle>Total {{spent.totalSpent | currency:'BRL'}}</mat-card-subtitle>
-            </mat-card-header>
-
-            <mat-card-content>
-                <div class="spent-info" *ngFor="let spentItem of spent.spentList">
-                    <span>{{spentItem.itemName}}</span>
-                    <span>{{spentItem.itemValue | currency:'BRL'}}</span>
-                </div>
-            </mat-card-content>
-        </div>
-    </mat-card> -->
-
     <div class="action-button">
         <button mat-mini-fab (click)="addSpent()">
             <span class="material-icons-outlined">

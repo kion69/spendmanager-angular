@@ -7,7 +7,6 @@ import { MatAccordion, MatExpansionPanel } from '@angular/material/expansion';
 import dayjs from 'dayjs';
 import { BottomSheetActions } from '../../../enum/bottom-sheet';
 import { DateFormatService } from '../../../services/date-parse.service';
-import { BottomSheetComponent } from '../../bottom-sheet/bottom-sheet.component';
 import { MatDatepicker } from '@angular/material/datepicker';
 import { v4 as uuidv4 } from 'uuid';
 import { Observable } from 'rxjs';
@@ -16,6 +15,7 @@ import { CdkDragEnd, CdkDragMove, CdkDragRelease, CdkDragStart } from '@angular/
 import { EventEmitterService } from '../../../services/event-emitter.service';
 import { EventEmitterConstants } from '../../../constants/event-emitter';
 import { verticalSlideAnimation } from '../../../../../dist/spendmanager-angular/browser/assets/animations/slide';
+import { SpentActionComponent } from '../../bottom-sheet/spent-action/spent-action.component';
 
 @Component({
   selector: 'app-add-spent',
@@ -33,18 +33,10 @@ export class AddSpentComponent implements OnInit {
   newDateInput: string;
   editingAction: boolean;
   editingItem: any;
+  selectMode: boolean;;
 
   @ViewChild('picker') picker: MatDatepicker<any>;
   @ViewChild(MatAccordion) accordion: MatAccordion;
-  @ViewChild('painel') painel: MatExpansionPanel;
-
-  @Output('cdkDragMoved') moved: Observable<CdkDragMove<any>>
-  @Output('cdkDragStarted') started: EventEmitter<CdkDragStart>
-  @Output('cdkDragReleased') released: EventEmitter<CdkDragRelease>
-  @Output('cdkDragEnded') ended: EventEmitter<CdkDragEnd>
-
-  dragPosition = { x: 0, y: 0 };
-  bacanudo = false;
 
   constructor(
     private dateParser: DateFormatService,
@@ -57,6 +49,7 @@ export class AddSpentComponent implements OnInit {
     this.addNewDate = false;
     this.disableAnimation = true;
     this.editingAction = false;
+    this.selectMode = false;
 
     this.dateForm = new FormBuilder().group({
       newDateInput: ['']
@@ -172,8 +165,8 @@ export class AddSpentComponent implements OnInit {
     const activeAccordion = this.accordion._headers.find(header => header._isExpanded());
     const accordionBodyContent = activeAccordion.panel._body.nativeElement.querySelector('.mat-expansion-panel-body');
 
-    this.bottomSheet.open(BottomSheetComponent, {
-      data: spentItem,
+    this.bottomSheet.open(SpentActionComponent, {
+      data: spentItem
     }).afterDismissed().subscribe(result => {
 
       const { action } = result;
@@ -199,41 +192,7 @@ export class AddSpentComponent implements OnInit {
     this.dialogRef.close(this.spentInformation);
   }
 
-  teste(ev) {
-    // console.log(ev);
-  }
-
-  abreocu() {
-    this.picker.open();
-  }
-
-  startei;
-  superpainel;
-  selectMode = false;
-
-  comecei(pega) {
-    this.startei = true;
-  }
-
-  terminei(ev) {
-    console.log('terminei', ev);
-    this.superpainel = {
-      'transition': 'transform 300ms cubic-bezier(0, 0, 0.2, 1)',
-    };
-
-    // ev.source.reset();
-    setTimeout(() => {
-      this.superpainel = '';
-      this.startei = false;
-    }, 300);
-  }
-
-  release(ev) {
-    console.log('relese', ev);
-    // this.opacity = 0;
-  }
-
-  selectionMode(par, item) {
+  selectionMode(item) {
     this.selectMode = true;
     item.selected = true;
   }

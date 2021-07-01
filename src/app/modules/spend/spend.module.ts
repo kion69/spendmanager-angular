@@ -10,6 +10,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CarouselComponent } from '../../component/carousel/carousel.component';
 import { SelectSpentPanelComponent } from '../../component/select-spent-panel/select-spent-panel.component';
+import { SelectOptionsComponent } from '../../component/bottom-sheet/select-options/select-options.component';
+import { SpentActionComponent } from '../../component/bottom-sheet/spent-action/spent-action.component';
 
 
 
@@ -20,6 +22,8 @@ import { SelectSpentPanelComponent } from '../../component/select-spent-panel/se
     LongPressDirective,
     CarouselComponent,
     SelectSpentPanelComponent,
+    SelectOptionsComponent,
+    SpentActionComponent
   ],
   imports: [
     CommonModule,

@@ -11,7 +11,7 @@
         <mat-accordion>
             <mat-expansion-panel *ngFor="let spent of spentInformation">
                 <mat-expansion-panel-header class="expansion-panel-container" matRipple
-                    (onLongPress)="selectionMode($event, spent)" longPress [pressTime]="600">
+                    (onLongPress)="selectionMode(spent)" longPress [pressTime]="600">
                     <div class="panel-container">
                         <span class="panel-title">
                             {{spent.spentDate}}
@@ -109,9 +109,11 @@
         </mat-accordion>
     </mat-dialog-content>
 
-    <div *ngIf="selectMode">
+    <mat-dialog-content *ngIf="selectMode">
         <app-select-spent-panel [spentInformation]="spentInformation">
         </app-select-spent-panel>
-    </div>
+    </mat-dialog-content>
+
+  
 
 </div>

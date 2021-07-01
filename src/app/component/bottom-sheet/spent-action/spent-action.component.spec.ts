@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BottomSheetComponent } from './bottom-sheet.component';
+import { SpentActionComponent } from './spent-action.component';
 
 describe('BottomSheetComponent', () => {
-  let component: BottomSheetComponent;
-  let fixture: ComponentFixture<BottomSheetComponent>;
+  let component: SpentActionComponent;
+  let fixture: ComponentFixture<SpentActionComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BottomSheetComponent ]
+      declarations: [ SpentActionComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BottomSheetComponent);
+    fixture = TestBed.createComponent(SpentActionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

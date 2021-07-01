@@ -21,7 +21,6 @@ import { registerLocaleData } from '@angular/common';
 import { ComponentFactoryService } from './services/component-factory.service';
 import { HeaderComponent } from './component/header/header.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BottomSheetComponent } from './component/bottom-sheet/bottom-sheet.component';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
@@ -34,7 +33,6 @@ registerLocaleData(localePtBr);
     NavigationMenuComponent,
     SideMenuComponent,
     HeaderComponent,
-    BottomSheetComponent,
   ],
   imports: [
     CommonModule,

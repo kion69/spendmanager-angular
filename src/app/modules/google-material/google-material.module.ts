@@ -17,6 +17,8 @@ import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatSelectModule } from '@angular/material/select';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { PortalModule } from '@angular/cdk/portal';
 
 @NgModule({
   exports: [
@@ -38,7 +40,9 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MatBottomSheetModule,
     MatSelectModule,
     MatProgressSpinnerModule,
-    DragDropModule
+    DragDropModule,
+    OverlayModule,
+    PortalModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },

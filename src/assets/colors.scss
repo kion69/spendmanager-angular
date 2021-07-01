@@ -23,3 +23,19 @@ $header-height: 70px;
 @mixin global-margin {
   margin: 0 15px;
 }
+
+
+button.red-button {
+  background-color: $red;
+  color: #fff;
+}
+
+button.cyan-button {
+  background-color: $cyan;
+  color: $dark
+}
+
+button.dark-button {
+  background-color: $dark;
+  color: #fff;
+}

@@ -47,7 +47,6 @@ h5 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   grid-gap: 10px;
-  // overflow-x: hidden;
 
   .additional-information {
     grid-column-start: 1;
@@ -65,16 +64,8 @@ h5 {
   }
 }
 
-mat-icon {
-  .meuicone {
-    color: $dark;
-    vertical-align: middle
-  }
-}
-
 .mat-datepicker-toggle {
   color: $dark;
-
 }
 
 .mat-dialog-content {
@@ -129,7 +120,6 @@ mat-icon {
     ::ng-deep .mat-form-field-outline-thick {
       color: $red;
     }
-
   }
 }
 
@@ -217,14 +207,6 @@ mat-icon {
   }
 }
 
-// .mat-expansion-panel-header {
-//   .mat-content {
-//     @media (max-width: 340px) {
-//       flex-direction: column;
-//     }
-//   }
-// }
-
 .new-date-container {
   display: flex;
   flex-direction: row;
@@ -269,7 +251,7 @@ mat-icon {
   justify-content: space-between;
   width: 100%;
   align-items: center;
-  grid-template-columns: auto auto 50px;
+  grid-template-columns: auto auto;
   grid-template-areas: 'item1 item2 .';
 
   @media (max-width: 380px) {
@@ -291,16 +273,5 @@ mat-icon {
     color: rgba(0, 0, 0, 0.54);
     flex-grow: 2;
     display: flex;
-  }
-
-  .panel-selected {
-    grid-area: item3;
-    display: flex;
-    justify-content: center;
-
-    span {
-      display: flex;
-      color: $dark;
-    }
   }
 }
