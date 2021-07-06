@@ -9,22 +9,25 @@ import { FirebaseDate } from '../interface/firebase-date';
 export class DateFormatService {
 
   constructor() { }
-
-  parse(inputDate) {
+  /**
+   * Change format date from 'DD/MM/YYYY' to 'MM/DD/YYYY'
+  */
+  formatDate(inputDate: string) {
     const date = inputDate?.replace(/[-|\/]/g, '/').split('/');
-    const formattedDate = `${date[1]}/${date[0]}/${date[2]}`;
-    return dayjs(formattedDate, 'DD/MM/YYYY', true);
+    return `${date[1]}/${date[0]}/${date[2]}`;
   }
 
   transformDate(inputDate) {
     return dayjs(inputDate).format('DD/MM/YYYY');
   }
 
-  convertDayjsToObject(inputDate: Dayjs): FirebaseDate {
+  convertDayjsToObject(inputDate: string): FirebaseDate {
+
+    const formatedDate = this.formatDate(inputDate);
     return {
-      day: String(dayjs(inputDate).day()),
-      month: dayjs(inputDate).format('MMMM'),
-      year: String(dayjs(inputDate).year())
+      day: String(dayjs(formatedDate).date()),
+      month: dayjs(formatedDate).format('MMMM'),
+      year: String(dayjs(formatedDate).year())
     };
   }
 

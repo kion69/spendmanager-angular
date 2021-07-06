@@ -16,6 +16,7 @@ import { EventEmitterService } from '../../../services/event-emitter.service';
 import { EventEmitterConstants } from '../../../constants/event-emitter';
 import { verticalSlideAnimation } from '../../../../../dist/spendmanager-angular/browser/assets/animations/slide';
 import { SpentActionComponent } from '../../bottom-sheet/spent-action/spent-action.component';
+import { Spent } from '../../../interface/spent';
 
 @Component({
   selector: 'app-add-spent',
@@ -27,7 +28,7 @@ import { SpentActionComponent } from '../../bottom-sheet/spent-action/spent-acti
 export class AddSpentComponent implements OnInit {
 
   dateForm: FormGroup;
-  spentInformation = Array<any>();
+  spentInformation = Array<Spent>();
   disableAnimation: boolean;
   addNewDate: boolean;
   newDateInput: string;
@@ -108,7 +109,7 @@ export class AddSpentComponent implements OnInit {
       return;
     }
 
-    const parsedDate = this.dateParser.parse(dateInput.targetElement.value);
+    const parsedDate = this.dateParser.formatDate(dateInput.targetElement.value);
     const formattedDate = this.dateParser.transformDate(parsedDate);
 
     if (!dayjs(parsedDate).isValid()) {
@@ -134,7 +135,7 @@ export class AddSpentComponent implements OnInit {
     this.picker.select(null);
   }
 
-  deleteItem(spentList: [], index) {
+  deleteItem(spentList: Spent[], index) {
     spentList.splice(index, 1);
     this.calculateTotal();
   }
@@ -145,7 +146,7 @@ export class AddSpentComponent implements OnInit {
     spentForm.controls['itemDescription'].setValue(item.itemDescription);
   }
 
-  saveItem(list, form: FormGroup, abc, i) {
+  saveItem(list: Spent, form: FormGroup) {
     const { index } = this.editingItem;
     list[index] = {
       itemName: form.controls['itemName'].value,
@@ -161,7 +162,7 @@ export class AddSpentComponent implements OnInit {
     this.editingAction = !this.editingAction;
   }
 
-  openOptions(spentItem, spentList, spentForm, index) {
+  openOptions(spentItem: Spent, spentList: Spent[], spentForm: FormGroup, index: number) {
     const activeAccordion = this.accordion._headers.find(header => header._isExpanded());
     const accordionBodyContent = activeAccordion.panel._body.nativeElement.querySelector('.mat-expansion-panel-body');
 

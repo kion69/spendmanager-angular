@@ -74,7 +74,7 @@
                                     <span>Cancelar</span>
                                 </button>
                                 <button class="modal-action-button save-button" mat-button
-                                    (click)="saveItem(spent.spentList, spent.spentForm, spent, i)" type="button">
+                                    (click)="saveItem(spent.spentList, spent.spentForm)" type="button">
                                     <div class="button-container">
                                         <span class="material-icons material-icons-round">
                                             <mat-icon>edit</mat-icon>
@@ -110,10 +110,9 @@
     </mat-dialog-content>
 
     <mat-dialog-content *ngIf="selectMode">
-        <app-select-spent-panel [spentInformation]="spentInformation">
-        </app-select-spent-panel>
+        <app-select-spent-panel [spentInformation]="spentInformation"> </app-select-spent-panel>
     </mat-dialog-content>
 
-  
+
 
 </div>

@@ -15,6 +15,7 @@ import { DateFormatService } from '../../services/date-parse.service';
 import { FirebaseDate } from '../../interface/firebase-date';
 import { selectedPanel } from '../../../assets/animations/select-panel.animation';
 import { fadeAnimation } from '../../../assets/animations/slide';
+import { Spent } from '../../interface/spent';
 
 @Component({
   selector: 'app-spend',
@@ -27,7 +28,7 @@ export class SpendComponent implements OnInit {
 
   currentDate: Dayjs;
   dateObject: FirebaseDate;
-  spentInformation: any;
+  spentInformation: Spent[];
   firebaseList: {};
   spentData: any; //Needs to create an Interface  
   contentList: any;
@@ -54,7 +55,7 @@ export class SpendComponent implements OnInit {
         }
       });
 
-    this.dateObject = this.dateService.convertDayjsToObject(this.currentDate);
+    this.dateObject = this.dateService.convertDayjsToObject(this.currentDate.format('DD/MM/YYYY'));
 
     this.getSpents(this.dateObject.month);
 
@@ -66,8 +67,8 @@ export class SpendComponent implements OnInit {
     //   });
   }
 
-  loadContent(snapshot: any, month: string)
-  loadContent(snapshot: DataSnapshot, month: string) {
+  loadContent(snapshot: DataSnapshot, month: string): void
+  loadContent(snapshot: DataSnapshot): void {
     if (snapshot) {
       const props = snapshot;
       const monthItems = Object.keys(props).map((key) => props[key]);
@@ -86,12 +87,9 @@ export class SpendComponent implements OnInit {
           this.loadContent(snapshot.val().spentList, month)
         } else {
           this.spentInformation = [];
+          this.eventEmitter.sendValue(EventEmitterConstants.HEADER_SPENT_TOTAL, this.spentInformation);
         }
-      },
-        (seila) => {
-          this.loadContent(spentDataJSON, this.dateObject.month);
-          console.log('sei la');
-        });
+      });
   }
 
   addSpent() {
@@ -102,7 +100,7 @@ export class SpendComponent implements OnInit {
       .subscribe(
         (result: any[]) => {
           if (result) {
-            result.map((spent: any) => {
+            result.map((spent: Spent) => {
               const existingDate = this.spentInformation?.find(existingSpent => existingSpent.spentDate === spent.spentDate);
               if (existingDate) {
                 existingDate.spentList.push(...spent.spentList);
@@ -113,27 +111,7 @@ export class SpendComponent implements OnInit {
                 this._firebaseService.insertItem(this.dateObject, spent.spentDate, spent);
               }
             });
-
             this.eventEmitter.sendValue(EventEmitterConstants.HEADER_SPENT_TOTAL, this.spentInformation);
-          }
-        });
-  }
-
-  inspectCurrentSpent(spent) {
-    this.dialog.open(AddSpentComponent, {
-      data: {
-        ...spent,
-        spentList: Array.from(spent.spentList)
-      },
-      minHeight: '500px',
-      width: '500px',
-      maxWidth: '90vw'
-    }).afterClosed()
-      .subscribe(
-        result => {
-          if (result) {
-            this.contentList.spentList = result[0].spentList;
-            this.eventEmitter.sendValue(EventEmitterConstants.HEADER_SPENT_TOTAL, this.contentList);
           }
         });
   }

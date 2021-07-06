@@ -28,8 +28,6 @@ export class HeaderComponent implements OnInit {
     this.currentYear = dayjs().year();
     this.totalSpent = 0;
 
-    // this.calculateTotal(this.spentData[this.currentYear][this.currentMonth]);
-
     this.eventEmitter.register(EventEmitterConstants.HEADER_SPENT_TOTAL).subscribe(result => {
       this.calculateTotal(result);
       this.showLoader = false;

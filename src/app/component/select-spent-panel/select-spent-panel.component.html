@@ -1,6 +1,6 @@
 <div class="ajuda">
-    <div class="select-items-container" *ngFor="let spent of spentInformation" [@selectPanel]="spent.selected"
-        (click)="selectItem(spent)">
+    <div class="select-items-container" *ngFor="let spent of spentInformation; let i = index" [@selectPanel]="spent.selected"
+        (click)="selectItem(spent, i)">
         <div class="panel-container">
             <span class="panel-title">
                 {{spent.spentDate}}
@@ -12,4 +12,4 @@
     </div>
 </div>
 
-<app-select-options [(openPanel)]="openPanel" [(itemCount)]="itemCount"></app-select-options>
+<app-select-options [(openPanel)]="openPanel" [(itemCount)]="itemCount" [selectedItems]="spentInformation"></app-select-options>
