@@ -8,7 +8,7 @@ import { AddSpentComponent } from '../../component/modal/add-spent/add-spent.com
 import { LongPressDirective } from '../../directive/long-press';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { CarouselComponent } from '../../component/carousel/carousel.component';
+import { SelectComponent } from '../../component/select/select.component';
 import { SelectSpentPanelComponent } from '../../component/select-spent-panel/select-spent-panel.component';
 import { SelectOptionsComponent } from '../../component/bottom-sheet/select-options/select-options.component';
 import { SpentActionComponent } from '../../component/bottom-sheet/spent-action/spent-action.component';
@@ -20,7 +20,7 @@ import { SpentActionComponent } from '../../component/bottom-sheet/spent-action/
     SpendComponent,
     AddSpentComponent,
     LongPressDirective,
-    CarouselComponent,
+    SelectComponent,
     SelectSpentPanelComponent,
     SelectOptionsComponent,
     SpentActionComponent

@@ -2,22 +2,25 @@ import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } fro
 import dayjs from 'dayjs';
 
 @Component({
-  selector: 'app-carousel',
-  templateUrl: './carousel.component.html',
-  styleUrls: ['./carousel.component.scss'],
+  selector: 'app-select',
+  templateUrl: './select.component.html',
+  styleUrls: ['./select.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class CarouselComponent implements OnInit {
+export class SelectComponent implements OnInit {
 
   months = ['Janeiro', 'Feveiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Outubro', 'Novembro', 'Dezembro'];
-  monthSelected: string;
+  selectedMonth: string;
 
   @Output() emitChange = new EventEmitter();
 
   constructor() { }
 
   ngOnInit(): void {
-    this.monthSelected = dayjs().format('MMMM');
+    this.selectedMonth = dayjs().format('MMMM');
+    setTimeout(() => {
+      this.monthChanged({ value: this.selectedMonth });
+    });
   }
 
   monthChanged({ value }) {

@@ -1,7 +1,7 @@
 <div class="spend-body">
 
     <div style="display: flex; justify-content: center">
-        <app-carousel (emitChange)="getSpents($event)"></app-carousel>
+        <app-select (emitChange)="getSpents($event)"></app-select>
     </div>
 
     <app-card [contentList]="spentInformation">
